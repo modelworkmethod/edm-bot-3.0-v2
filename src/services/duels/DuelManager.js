@@ -273,6 +273,20 @@ class DuelManager {
     const opponentXPGained =
       opponentXP - Number(duel.opponent_start_xp || 0);
 
+    // Final balance verification at completion
+    const challengerBalanced = await this.checkBalance(duel.id, duel.challenger_id);
+    const opponentBalanced = await this.checkBalance(duel.id, duel.opponent_id);
+
+    if (!challengerBalanced) {
+      await query(`UPDATE duels SET challenger_balance_penalty = true WHERE id = $1`, [duel.id]);
+      duel.challenger_balance_penalty = true;
+    }
+
+    if (!opponentBalanced) {
+      await query(`UPDATE duels SET opponent_balance_penalty = true WHERE id = $1`, [duel.id]);
+      duel.opponent_balance_penalty = true;
+    }
+
     let winnerId = null;
 
     if (duel.challenger_balance_penalty && duel.opponent_balance_penalty) {

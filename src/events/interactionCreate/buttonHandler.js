@@ -4,7 +4,7 @@
  */
 
 const { createLogger } = require('../../utils/logger');
-const { handleError } = require('../../utils/errorHandler');
+const { handleError, handleDiscordError } = require('../../utils/errorHandler');
 const { getLocalDayString } = require('../../utils/timeUtils');
 const {
   createCoreSocialModal,

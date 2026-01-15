@@ -33,15 +33,8 @@ const DATE_RE = /^\d{4}-\d{2}-\d{2}$/;
  * 4) config.channels.* fallbacks
  */
 function resolveGeneralChannelId() {
-  return (
-    process.env.WINGMAN_GENERAL_CHANNEL_ID ||
-    process.env.CHANNEL_GENERAL_ID ||
-    process.env.GENERAL_CHANNEL_ID ||
-    config?.channels?.general ||
-    config?.channels?.generalId ||
-    config?.channels?.generalChannelId ||
-    null
-  );
+  const { getGeneralChannelId } = require('../../config/environment');
+  return getGeneralChannelId() || config?.channels?.general || null;
 }
 
 
@@ -450,11 +443,19 @@ if (!interaction.deferred && !interaction.replied) {
       }
     }
   } catch (error) {
+    // Use Discord-specific error handling if it's a Discord API error
+    const { handleError, handleDiscordError } = require('../../utils/errorHandler');
+    
+    if (error.code && typeof error.code === 'number') {
+      handleDiscordError(error, `ModalHandler.${customId}`);
+    } else {
+      handleError(error, `ModalHandler.${customId}`);
+    }
+    
     const msg = error?.message || '';
     const code = error?.code;
 
-    logger.error('Modal submission error', { error: msg, customId });
-
+    // Discord API errors that we should ignore (already handled)
     const isInteractionStateError =
       code === 10062 ||
       code === 40060 ||
@@ -480,7 +481,7 @@ if (!interaction.deferred && !interaction.replied) {
         await interaction.reply(payload);
       }
     } catch (replyError) {
-      logger.error('Failed to send modal error reply', { error: replyError.message });
+      handleError(replyError, `ModalHandler.${customId}.reply`);
     }
   }
 }

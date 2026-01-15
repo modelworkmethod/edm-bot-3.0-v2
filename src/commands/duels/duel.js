@@ -459,9 +459,7 @@ async handleStatus(interaction, services) {
     logger.error('Failed to get duel status', { error: error.message });
     await interaction.editReply('❌ Failed to get duel status. Please try again.');
   }
-}
-
-,
+},
 
   async handleHistory(interaction, services) {
     // NO deferReply aquí, ya se hizo en execute (efímero)

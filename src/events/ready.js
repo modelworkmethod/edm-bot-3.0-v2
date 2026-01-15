@@ -10,6 +10,12 @@ const { initializeRepositories } = require('../database/repositories');
 const { initializeServices } = require('../services');
 const { getCommands } = require('../commands');
 const { CommandRegistry, registerCommands } = require('../commands/commandRegistry');
+const { initializePool } = require('../database/postgres');
+const { startMonthlyCallsScheduler } = require('../services/reminders/MonthlyCallsScheduler');
+const { startNightlyStatsReminder } = require('../services/reminders/NightlyStatsReminder');
+const JobScheduler = require('../jobs/JobScheduler');
+const { getGeneralChannelId } = require('../config/environment');
+const { handleError } = require('../utils/errorHandler');
 
 const config = require('../config/settings');
 
@@ -24,6 +30,127 @@ const { startWeeklyCallDailyReminders } = require('../jobs/weeklyCallDailyRemind
 
 const logger = createLogger('ReadyEvent');
 
+/**
+ * Start scheduled background jobs
+ * @param {object} services - Services object
+ * @param {object} config - Configuration object
+ */
+function startScheduledJobs(services, config) {
+  logger.info('Starting scheduled jobs...');
+
+  // Announcement queue processor (every 30 seconds)
+  setInterval(async () => {
+    try {
+      if (services?.announcementQueue && typeof services.announcementQueue.processQueue === 'function') {
+        await services.announcementQueue.processQueue();
+      }
+    } catch (error) {
+      handleError(error, 'ScheduledJob.AnnouncementQueue');
+    }
+  }, 30000);
+
+  // Daily reminder check (every hour, triggers at 5pm EST)
+  const checkReminders = async () => {
+    const now = new Date();
+    const hour = now.getHours();
+
+    // Run at 5pm EST (17:00)
+    if (hour === 17 && services?.reminderService) {
+      try {
+        logger.info('Running daily reminder check...');
+        await services.reminderService.checkAndSendReminders();
+      } catch (error) {
+        handleError(error, 'ScheduledJob.DailyReminder');
+      }
+    }
+  };
+
+  setInterval(checkReminders, 3600000); // Check every hour
+
+  // Double XP event processor (every 5 minutes)
+  setInterval(async () => {
+    try {
+      if (services?.doubleXPManager) {
+        await services.doubleXPManager.processEventUpdates(config.discord.announcementsChannelId);
+      }
+    } catch (error) {
+      handleError(error, 'ScheduledJob.DoubleXPProcessor');
+    }
+  }, 300000);
+
+  // Duel finalization check (every 5 minutes)
+  setInterval(async () => {
+    try {
+      if (services?.duelManager) {
+        await services.duelManager.checkExpiredDuels(config.discord.announcementsChannelId);
+      }
+    } catch (error) {
+      handleError(error, 'ScheduledJob.DuelFinalization');
+    }
+  }, 300000);
+
+  // Clean engagement monitor cooldowns (every 30 minutes)
+  setInterval(() => {
+    try {
+      if (services?.chatEngagementMonitor) {
+        services.chatEngagementMonitor.clearOldCooldowns();
+      }
+      if (services?.winsMonitor) {
+        services.winsMonitor.clearOldCooldowns();
+      }
+    } catch (error) {
+      handleError(error, 'ScheduledJob.CooldownCleanup');
+    }
+  }, 1800000);
+
+  // Clear expired timeouts (every 10 minutes)
+  setInterval(async () => {
+    try {
+      if (services?.warningSystem) {
+        await services.warningSystem.clearExpiredTimeouts();
+      }
+    } catch (error) {
+      handleError(error, 'ScheduledJob.TimeoutCleanup');
+    }
+  }, 600000);
+
+  // Daily analytics calculation (every hour, triggers at 2 AM)
+  const runDailyAnalytics = async () => {
+    const now = new Date();
+    const hour = now.getHours();
+
+    if (hour === 2 && services?.riskScorer) {
+      try {
+        logger.info('Running daily analytics...');
+
+        // Calculate risk scores for all users
+        await services.riskScorer.calculateAllUsers();
+
+        // Generate interventions for at-risk users
+        const atRisk = await services.riskScorer.getAtRiskUsers(60, 30);
+
+        for (const user of atRisk) {
+          const pattern = await services.patternDetector.detectPattern(user.user_id);
+          await services.interventionGenerator.generateIntervention(
+            user.user_id,
+            user.risk_score,
+            pattern
+          );
+        }
+
+        logger.info('Daily analytics complete', { atRiskCount: atRisk.length });
+
+      } catch (error) {
+        handleError(error, 'ScheduledJob.DailyAnalytics');
+      }
+    }
+  };
+
+  setInterval(runDailyAnalytics, 3600000); // Check every hour
+
+  logger.info('✓ Scheduled jobs started');
+}
+
 module.exports = {
   name: 'ready',
   once: true,
@@ -37,16 +164,32 @@ module.exports = {
       logger.info(`Serving ${client.guilds.cache.size} guild(s)`);
       logger.info(`Watching ${client.users.cache.size} users`);
 
-      // Initialize repositories
+      // 1) Initialize database pool (must happen before repositories)
+      await initializePool(config.database);
+      logger.info('✓ Database connected');
+
+      // 2) Initialize repositories
       initializeRepositories();
-      logger.info('Repositories initialized');
+      logger.info('✓ Repositories initialized');
 
-      // Initialize services
-      const services = await initializeServices(client);
-      logger.info('Services initialized');
+      // 3) Initialize services
+      const services = await initializeServices(client, config, require('../database/repositories').getRepositories());
+      logger.info('✓ Services initialized');
 
-      // Store services on client for access in commands
+      // 4) Store services on client for access in commands
       client.services = services;
+
+      // 5) Inject Discord client into UserService for level-up announcements
+      try {
+        if (services?.userService && typeof services.userService.setDiscordClient === 'function') {
+          services.userService.setDiscordClient(client);
+          logger.info('✓ UserService Discord client injected (level-up announcements enabled)');
+        } else {
+          logger.warn('⚠️ services.userService.setDiscordClient missing — level-up announcements will not work');
+        }
+      } catch (e) {
+        logger.warn('UserService.setDiscordClient failed (non-fatal)', { error: e?.message });
+      }
 
       // Load commands map for runtime dispatch
       client.commands = getCommands();
@@ -133,21 +276,6 @@ module.exports = {
       }
 
       // ─────────────────────────────────────────────────────────────
-      // 🔥 TEMP TEST — manual fire on startup (single TEST check-in)
-      // env: GROUPCALL_FORCE_POST=true
-      // ─────────────────────────────────────────────────────────────
-      if (String(process.env.GROUPCALL_FORCE_POST || '').toLowerCase() === 'true') {
-        setTimeout(async () => {
-          try {
-            await groupCallTracker.postGroupCallCheckIn('TEST');
-            logger.info('✅ GroupCall TEST check-in sent');
-          } catch (e) {
-            logger.error('GroupCall TEST failed', { error: e?.message, stack: e?.stack });
-          }
-        }, 5000);
-      }
-
-      // ─────────────────────────────────────────────────────────────
       // 🧪 PREVIEW — Group Calls check-ins (3 messages)
       // env: GROUPCALL_PREVIEW=true
       // ─────────────────────────────────────────────────────────────
@@ -197,6 +325,82 @@ module.exports = {
       // Start nickname refresh scheduler
       const { scheduleNicknameRefresh } = require('../jobs/nicknameRefresh');
       scheduleNicknameRefresh(client, services);
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ CHANNEL RESOLUTION (single source of truth)
+      // ─────────────────────────────────────────────────────────────
+      const generalChannelId = getGeneralChannelId() || config.channels?.general || null;
+
+      if (!generalChannelId) {
+        logger.warn('⚠️ GENERAL channel id not configured. Set GENERAL_CHANNEL_ID or CHANNEL_GENERAL_ID in .env');
+      } else {
+        logger.info('✓ General channel resolved', { generalChannelId });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ MONTHLY CALLS REMINDERS (Jules/Saks) — post in General
+      // ─────────────────────────────────────────────────────────────
+      if (generalChannelId) {
+        try {
+          startMonthlyCallsScheduler(client, {
+            channelId: generalChannelId,
+            julesZoomUrl: process.env.JULES_ZOOM_URL || null,
+            saksZoomUrl: process.env.SAKS_ZOOM_URL || null,
+            zoomPlaceholder: '🔗 (Zoom link TBD)',
+            durationMinutesJules: 90,
+            durationMinutesSaks: 90,
+          });
+          logger.info('✓ MonthlyCallsScheduler started', { channelId: generalChannelId });
+        } catch (e) {
+          logger.warn('MonthlyCallsScheduler failed to start', { error: e?.message });
+        }
+      } else {
+        logger.warn('MonthlyCallsScheduler NOT started (missing channelId). Set GENERAL_CHANNEL_ID.');
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ NIGHTLY REMINDER at 10pm ET in General
+      // ─────────────────────────────────────────────────────────────
+      if (generalChannelId) {
+        try {
+          startNightlyStatsReminder(client, {
+            channelId: generalChannelId,
+          });
+          logger.info('✓ NightlyStatsReminder started', { channelId: generalChannelId });
+        } catch (e) {
+          logger.warn('NightlyStatsReminder failed to start', { error: e?.message });
+        }
+      } else {
+        logger.warn('NightlyStatsReminder NOT started (missing channelId). Set GENERAL_CHANNEL_ID.');
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ STATIC CARDS / PERSISTENT UI JOBS (Barbie static menu, etc.)
+      // ─────────────────────────────────────────────────────────────
+      try {
+        await JobScheduler.start(client);
+        logger.info('✓ JobScheduler started');
+      } catch (e) {
+        logger.warn('JobScheduler.start failed', { error: e?.message });
+      }
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ SCHEDULED BACKGROUND JOBS
+      // ─────────────────────────────────────────────────────────────
+      startScheduledJobs(services, config);
+
+      // ─────────────────────────────────────────────────────────────
+      // ✅ HEALTH CHECKS & BACKUPS
+      // ─────────────────────────────────────────────────────────────
+      if (services?.healthCheck) {
+        services.healthCheck.scheduleChecks(5); // Every 5 minutes
+        logger.info('✓ Health checks scheduled');
+      }
+
+      if (services?.backupManager) {
+        services.backupManager.scheduleAutoBackup();
+        logger.info('✓ Auto-backup scheduled');
+      }
 
       logger.info('Scheduled jobs started');
       logger.info('Bot is ready and operational');

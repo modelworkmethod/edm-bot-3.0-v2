@@ -7,7 +7,7 @@
 
 const { EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
 const logger = require('../../utils/logger');
-const config = require('../../../config/settings');
+const config = require('../../config/settings');
 
 module.exports = {
   async execute(interaction) {
@@ -22,7 +22,7 @@ module.exports = {
         return;
       }
 
-      const BarbieListManager = require('../../../services/barbie/BarbieListManager');
+      const BarbieListManager = require('../../services/barbie/BarbieListManager');
       const manager = new BarbieListManager();
 
       const contact = await manager.getContact(contactId, interaction.user.id);

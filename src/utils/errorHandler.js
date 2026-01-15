@@ -65,14 +65,50 @@ function handleError(error, context = 'Unknown') {
  * Wrap async functions with error handling
  * @param {Function} fn - Async function to wrap
  * @param {string} context - Context name
+ * @param {object} options - Options for error handling
+ * @param {boolean} options.rethrow - Whether to rethrow the error (default: true)
+ * @param {Function} options.onError - Optional callback for custom error handling
  * @returns {Function} Wrapped function
  */
-function asyncErrorHandler(fn, context) {
+function asyncErrorHandler(fn, context, options = {}) {
+  const { rethrow = true, onError } = options;
+  
   return async (...args) => {
     try {
       return await fn(...args);
     } catch (error) {
       handleError(error, context);
+      
+      if (onError) {
+        await onError(error, context, args);
+      }
+      
+      if (rethrow) {
+        throw error;
+      }
+      
+      return null;
+    }
+  };
+}
+
+/**
+ * Wrap async function and handle Discord-specific errors
+ * @param {Function} fn - Async function to wrap
+ * @param {string} context - Context name
+ * @returns {Function} Wrapped function
+ */
+function asyncDiscordErrorHandler(fn, context) {
+  return async (...args) => {
+    try {
+      return await fn(...args);
+    } catch (error) {
+      // Check if it's a Discord API error
+      if (error.code && typeof error.code === 'number') {
+        handleDiscordError(error, context);
+      } else {
+        handleError(error, context);
+      }
       throw error;
     }
   };
@@ -113,11 +149,30 @@ function handleDiscordError(error, context) {
   );
 }
 
+/**
+ * Safely execute an async function with error handling
+ * Returns null on error instead of throwing
+ * @param {Function} fn - Async function to execute
+ * @param {string} context - Context name
+ * @param {*} defaultValue - Default value to return on error
+ * @returns {Promise<*>} Result or defaultValue on error
+ */
+async function safeExecute(fn, context, defaultValue = null) {
+  try {
+    return await fn();
+  } catch (error) {
+    handleError(error, context);
+    return defaultValue;
+  }
+}
+
 module.exports = {
   AppError,
   ErrorTypes,
   handleError,
   asyncErrorHandler,
-  handleDiscordError
+  asyncDiscordErrorHandler,
+  handleDiscordError,
+  safeExecute
 };
 

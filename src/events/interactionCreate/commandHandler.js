@@ -4,7 +4,7 @@
  */
 
 const { createLogger } = require('../../utils/logger');
-const { handleError } = require('../../utils/errorHandler');
+const { handleError, handleDiscordError, ErrorTypes } = require('../../utils/errorHandler');
 const AuditLogger = require('../../services/security/AuditLogger');
 
 const logger = createLogger('CommandHandler');
@@ -99,13 +99,20 @@ async function handleCommand(interaction, services) {
       );
     }
   } catch (error) {
-    handleError(error, `CommandHandler.${interaction.commandName}`);
+    // Use Discord-specific error handling if it's a Discord API error
+    if (error.code && typeof error.code === 'number') {
+      handleDiscordError(error, `CommandHandler.${interaction.commandName}`);
+    } else {
+      handleError(error, `CommandHandler.${interaction.commandName}`);
+    }
     
     const msg = error?.message || '';
     const code = error?.code;
 
+    // Discord API errors that we should ignore (already handled)
     const isAlreadyAckError =
       code === 40060 ||
+      code === 10062 || // Unknown interaction
       msg.includes('Unknown interaction') ||
       msg.includes('Interaction has already been acknowledged');
 
@@ -118,7 +125,17 @@ async function handleCommand(interaction, services) {
       return;
     }
 
-    const errorMessage = 'There was an error executing this command. Please try again.';
+    // User-friendly error message
+    let errorMessage = 'There was an error executing this command. Please try again.';
+    
+    // Provide more specific messages for common errors
+    if (code === 50013) {
+      errorMessage = '❌ I don\'t have permission to perform this action.';
+    } else if (code === 50001) {
+      errorMessage = '❌ I don\'t have access to perform this action.';
+    } else if (code === 10008) {
+      errorMessage = '❌ The requested resource was not found.';
+    }
 
     try {
       const payload = {
@@ -132,7 +149,8 @@ async function handleCommand(interaction, services) {
         await interaction.reply(payload);
       }
     } catch (replyError) {
-      logger.error('Failed to send error message', { error: replyError.message });
+      // Use handleError for reply errors too
+      handleError(replyError, `CommandHandler.${interaction.commandName}.reply`);
     }
   }
 }

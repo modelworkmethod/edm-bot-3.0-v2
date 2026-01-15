@@ -7,14 +7,17 @@ const fs = require('fs');
 const path = require('path');
 
 // Required environment variables (bot cannot start without these)
+// Note: GENERAL_CHANNEL_ID or CHANNEL_GENERAL_ID (either is acceptable)
 const REQUIRED_VARS = [
   'DISCORD_TOKEN',
   'DISCORD_CLIENT_ID',
   'DISCORD_GUILD_ID',
   'DATABASE_URL',
-  'CHANNEL_GENERAL_ID',
   'ADMIN_USER_ID'
 ];
+
+// Required but flexible - either GENERAL_CHANNEL_ID or CHANNEL_GENERAL_ID
+const REQUIRED_GENERAL_CHANNEL = ['GENERAL_CHANNEL_ID', 'CHANNEL_GENERAL_ID'];
 
 // Optional but recommended
 const RECOMMENDED_VARS = [
@@ -40,6 +43,14 @@ function validateEnvironment() {
     missing.forEach(varName => console.error(`   - ${varName}`));
     console.error('\nCheck your .env file and ensure all required variables are set.');
     throw new Error(`Missing required environment variables: ${missing.join(', ')}`);
+  }
+
+  // Check for general channel ID (either name is acceptable)
+  const hasGeneralChannel = REQUIRED_GENERAL_CHANNEL.some(key => !!process.env[key]);
+  if (!hasGeneralChannel) {
+    console.error('Missing required general channel ID:');
+    console.error(`   - Must set either ${REQUIRED_GENERAL_CHANNEL.join(' OR ')}`);
+    throw new Error(`Missing required general channel ID: must set one of ${REQUIRED_GENERAL_CHANNEL.join(', ')}`);
   }
 
   // Warn about missing recommended vars
@@ -97,6 +108,15 @@ function getEnv(key, defaultValue = null, type = 'string') {
 }
 
 /**
+ * Get general channel ID (supports both GENERAL_CHANNEL_ID and CHANNEL_GENERAL_ID)
+ * @returns {string|null} General channel ID or null
+ */
+function getGeneralChannelId() {
+  // Support both naming conventions for backward compatibility
+  return getEnv('GENERAL_CHANNEL_ID') || getEnv('CHANNEL_GENERAL_ID');
+}
+
+/**
  * Get all channel IDs as an object
  * @returns {object} Channel ID mappings
  */
@@ -104,7 +124,7 @@ function getChannelIds() {
   return {
     input: getEnv('CHANNEL_INPUT_ID'),
     leaderboard: getEnv('CHANNEL_LEADERBOARD_ID'),
-    general: getEnv('CHANNEL_GENERAL_ID'),
+    general: getGeneralChannelId(), // Use unified function
     scorecard: getEnv('CHANNEL_SCORECARD_ID'),
     journal: getEnv('JOURNAL_CHANNEL_ID'),
     tenseyList: getEnv('TENSEYLIST_CHANNEL_ID'),
@@ -153,6 +173,7 @@ function getRoleIds() {
 module.exports = {
   validateEnvironment,
   getEnv,
+  getGeneralChannelId,
   getChannelIds,
   getRoleIds
 };

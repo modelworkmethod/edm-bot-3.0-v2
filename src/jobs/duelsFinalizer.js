@@ -4,6 +4,7 @@
  */
 
 const { createLogger } = require('../utils/logger');
+const { handleError } = require('../utils/errorHandler');
 const config = require('../config/settings');
 
 const logger = createLogger('DuelsFinalizer');
@@ -42,7 +43,7 @@ function scheduleDuelsFinalizer(client, services) {
 
   // Run immediately on start
   checkExpiredDuels(services, announcementChannelId).catch(err => {
-    logger.error('Initial duel check failed', { error: err.message });
+    handleError(err, 'DuelsFinalizer.InitialCheck');
   });
 
   // Then run every 10 minutes
@@ -50,7 +51,7 @@ function scheduleDuelsFinalizer(client, services) {
     try {
       await checkExpiredDuels(services, announcementChannelId);
     } catch (error) {
-      logger.error('Duel finalizer check failed', { error: error.message });
+      handleError(error, 'DuelsFinalizer.IntervalCheck');
     }
   }, CHECK_INTERVAL_MS);
 
@@ -73,7 +74,7 @@ async function checkExpiredDuels(services, channelId) {
     }
 
   } catch (error) {
-    logger.error('Failed to check expired duels', { error: error.message });
+    handleError(error, 'DuelsFinalizer.checkExpiredDuels');
     throw error;
   }
 }

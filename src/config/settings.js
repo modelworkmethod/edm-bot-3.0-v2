@@ -111,71 +111,81 @@ const settings = {
 };
 
 /**
- * Derived pg config for node-postgres (Pool)
+ * Build PostgreSQL pool configuration
  * - Uses DATABASE_URL if present 
  * - Else builds from discrete keys.
  * - On DO or sslmode/flags, SSL is enabled (rejectUnauthorized:false).
- * - If CA_CERTH_PATH exists, switch to strict validation.
+ * - If CA_CERT_PATH exists, switch to strict validation.
+ * @param {object} dbConfig - Database configuration object
+ * @returns {object} PostgreSQL pool configuration
  */
-(() => {
-  const fs = require('fs'); 
+function buildPostgresConfig(dbConfig) {
+  const fs = require('fs');
+  
+  const urlStr = dbConfig.url || '';
+  let urlHost = dbConfig.host || '';
+  let urlPort = dbConfig.port || 5432;
 
-  const urlStr = settings.database.url || '';
-  const urlHost = settings.database.host || '';
-  const urlPort = settings.database.port || 5432;
-
-  try {
-    if (urlStr){
+  // Parse URL if present
+  if (urlStr) {
+    try {
       const u = new URL(urlStr);
       urlHost = u.hostname || urlHost;
       urlPort = Number(u.port) || urlPort;
+    } catch {
+      // Ignore parse errors, use defaults
     }
-  }catch { /* ignore parse errors */ }
+  }
 
-  const urlWantsSSl = /\bsslmode=(require|verify-ca|verify-full|no-verify)\b/i.test(urlStr);
+  // Determine SSL requirements
+  const urlWantsSSL = /\bsslmode=(require|verify-ca|verify-full|no-verify)\b/i.test(urlStr);
   const looksLikeDO = /ondigitalocean\.com$/i.test(urlHost) || urlPort === 25060;
-  const wantsSSL = !!settings.database.ssl || urlWantsSSl || looksLikeDO || !!process.env.PGSSLMODE;
+  const wantsSSL = !!dbConfig.ssl || urlWantsSSL || looksLikeDO || !!process.env.PGSSLMODE;
 
-  
+  // Build SSL config
   let ssl = wantsSSL ? { rejectUnauthorized: false } : false;
 
-  // Adjuntar CA opcional si definiste CA_CERT_PATH
-  if (ssl && settings.database.caCertPath) {
+  // Add CA certificate if provided
+  if (ssl && dbConfig.caCertPath) {
     try {
-      const fs = require('fs');
-      const ca = fs.readFileSync(settings.database.caCertPath, 'utf8');
-      if (ca && ca.trim().length > 0) { 
-       ssl = { ca, rejectUnauthorized: true  };
+      const ca = fs.readFileSync(dbConfig.caCertPath, 'utf8');
+      if (ca && ca.trim().length > 0) {
+        ssl = { ca, rejectUnauthorized: true };
       }
     } catch {
-      // if A file missing, fall back to relaxed SSL
+      // If file missing, fall back to relaxed SSL
       ssl = { rejectUnauthorized: false };
     }
   }
 
+  // Build pool config
+  const basePoolConfig = {
+    max: 20,
+    idleTimeoutMillis: 30000,
+    connectionTimeoutMillis: 5000
+  };
+
   if (urlStr) {
-    settings.database.pg = {
+    return {
       connectionString: urlStr,
       ssl: ssl || { rejectUnauthorized: false },
-      max: 20,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000
+      ...basePoolConfig
     };
-  }else {
-    settings.database.pg = {
+  } else {
+    return {
       host: urlHost || 'localhost',
       port: Number(urlPort || 5432),
-      user: settings.database.user,
-      password: settings.database.password,
-      database: settings.database.name,
+      user: dbConfig.user,
+      password: dbConfig.password,
+      database: dbConfig.name,
       ssl: ssl || false,
-      max: 20,
-      idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 5000
+      ...basePoolConfig
     };
   }
+}
 
-})();
+// Build and attach PostgreSQL config
+settings.database.pg = buildPostgresConfig(settings.database);
 
 
 module.exports = settings;

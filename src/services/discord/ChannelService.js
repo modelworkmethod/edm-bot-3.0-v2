@@ -5,7 +5,7 @@
  */
 
 const { createLogger } = require('../../utils/logger');
-const { AppError, ErrorTypes, handleDiscordError } = require('../../utils/errorHandler');
+const { AppError, ErrorTypes, handleError, handleDiscordError } = require('../../utils/errorHandler');
 
 const logger = createLogger('ChannelService');
 
@@ -57,13 +57,11 @@ class ChannelService {
       return message;
 
     } catch (error) {
-      if (error.code) {
+      // Use Discord-specific error handling if it's a Discord API error
+      if (error.code && typeof error.code === 'number') {
         handleDiscordError(error, 'ChannelService.sendToChannel');
       } else {
-        logger.error('Failed to send message', {
-          channelId,
-          error: error.message
-        });
+        handleError(error, 'ChannelService.sendToChannel', { channelId });
       }
       throw error;
     }
@@ -89,8 +87,10 @@ class ChannelService {
       return channel;
 
     } catch (error) {
-      if (error.code) {
+      if (error.code && typeof error.code === 'number') {
         handleDiscordError(error, 'ChannelService.fetchChannel');
+      } else {
+        handleError(error, 'ChannelService.fetchChannel', { channelId });
       }
       throw error;
     }
@@ -122,8 +122,10 @@ class ChannelService {
       return await message.edit(messageOptions);
 
     } catch (error) {
-      if (error.code) {
+      if (error.code && typeof error.code === 'number') {
         handleDiscordError(error, 'ChannelService.editMessage');
+      } else {
+        handleError(error, 'ChannelService.editMessage', { channelId, messageId });
       }
       throw error;
     }
@@ -142,8 +144,10 @@ class ChannelService {
       await message.delete();
 
     } catch (error) {
-      if (error.code) {
+      if (error.code && typeof error.code === 'number') {
         handleDiscordError(error, 'ChannelService.deleteMessage');
+      } else {
+        handleError(error, 'ChannelService.deleteMessage', { channelId, messageId });
       }
       throw error;
     }

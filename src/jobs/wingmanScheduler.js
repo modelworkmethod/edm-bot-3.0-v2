@@ -4,6 +4,7 @@
  */
 
 const { createLogger } = require('../utils/logger');
+const { handleError } = require('../utils/errorHandler');
 const wingmanConfig = require('../config/wingmanConfig');
 const { query } = require('../database/postgres');
 
@@ -68,7 +69,7 @@ async function scheduleWingmanMatcher(client, services) {
       await executeWingmanRun(client, services, runKey, now);
 
     } catch (error) {
-      logger.error('Wingman scheduler error', { error: error.message });
+      handleError(error, 'WingmanScheduler.IntervalCheck');
     }
   }, 60000); // Check every minute
 }
@@ -169,10 +170,7 @@ async function executeWingmanRun(client, services, runKey, scheduledAt) {
     logger.info('Wingman run completed successfully', { runKey, stats });
 
   } catch (error) {
-    logger.error('Failed to execute wingman run', { 
-      error: error.message, 
-      runKey 
-    });
+    handleError(error, 'WingmanScheduler.executeWingmanRun', { runKey });
   }
 }
 

@@ -327,12 +327,9 @@ class StatsProcessor {
    * ✅ Resolve general channel id (env-first)
    */
   getGeneralChannelId() {
-    return (
-      process.env.GENERAL_CHANNEL_ID ||
-      process.env.CHANNEL_GENERAL_ID ||
-      process.env.WINGMAN_GENERAL_CHANNEL_ID ||
-      null
-    );
+    const { getGeneralChannelId } = require('../../config/environment');
+    const config = require('../../config/settings');
+    return getGeneralChannelId() || config.channels?.general || null;
   }
 
   /**

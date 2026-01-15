@@ -16,6 +16,7 @@ const {
 
 const { createLogger } = require('../../utils/logger');
 const { fail, throttled } = require('../../utils/plainTextReplies');
+const factionConfig = require('../../config/factionConfig');
 
 const logger = createLogger('LeaderboardCommand');
 
@@ -226,10 +227,16 @@ module.exports = {
         const prestigeIndicator = Number(e.prestige || 0) > 0 ? ` ★x${Number(e.prestige)}` : '';
         const displayName = e.displayName || 'Unknown User';
 
+        // Get faction color indicator
+        const factionInfo = factionConfig.getFactionByKey(e.faction);
+        const factionColorIndicator = factionInfo
+          ? (factionInfo.key === 'Luminarchs' ? '🟡' : '🟣')
+          : '';
+
         const nameField =
           rank <= 3
-            ? `${rankTag(rank)} **${displayName}**${prestigeIndicator}\n${factionShort} Lv${level}`
-            : `${rankTag(rank)} ${displayName}${prestigeIndicator}\n${factionShort} Lv${level}`;
+            ? `${rankTag(rank)} ${factionColorIndicator}**${displayName}**${prestigeIndicator}\n${factionShort} Lv${level}`
+            : `${rankTag(rank)} ${factionColorIndicator}${displayName}${prestigeIndicator}\n${factionShort} Lv${level}`;
 
         const mainLabel = statKey ? (result.stat || statKey) : 'XP';
 
@@ -364,9 +371,17 @@ function rankTag(rank) {
 
 function prettyBar(progress01, size = 12) {
   const p = clamp01(progress01);
-  const filled = Math.round(p * size);
-  const empty = size - filled;
-  return `${'▰'.repeat(filled)}${'▱'.repeat(empty)}`;
+  const totalBlocks = p * size;
+  const fullBlocks = Math.floor(totalBlocks);
+  const partial = totalBlocks - fullBlocks;
+  const empty = size - fullBlocks - (partial > 0 ? 1 : 0);
+  
+  // Gradient characters: █▉▊▋▌▍▎▏ (from full to empty)
+  const gradientChars = ['█', '▉', '▊', '▋', '▌', '▍', '▎', '▏'];
+  const gradientIndex = Math.min(Math.floor(partial * gradientChars.length), gradientChars.length - 1);
+  const partialChar = partial > 0 ? gradientChars[gradientIndex] : '';
+  
+  return `${'█'.repeat(fullBlocks)}${partialChar}${'▁'.repeat(Math.max(0, empty))}`;
 }
 
 function factionMeta(faction) {

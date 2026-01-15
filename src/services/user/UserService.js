@@ -126,16 +126,12 @@ class UserService {
   }
 
   /**
-   * ✅ Resolve General channel ID from env/settings
+   * ✅ Resolve General channel ID from config (single source of truth)
    */
   _getGeneralChannelId() {
-    return (
-      process.env.GENERAL_CHANNEL_ID ||
-      envConfig?.GENERAL_CHANNEL_ID ||
-      settingsConfig?.generalChannelId ||
-      settingsConfig?.channels?.general ||
-      null
-    );
+    const { getGeneralChannelId } = require('../../config/environment');
+    const config = require('../../config/settings');
+    return getGeneralChannelId() || config.channels?.general || null;
   }
 
   /**
