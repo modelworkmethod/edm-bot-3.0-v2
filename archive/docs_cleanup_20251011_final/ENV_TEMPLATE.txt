@@ -1,0 +1,8 @@
+# Copy to .env and fill values (do not commit secrets)
+DISCORD_TOKEN=xxxx
+DISCORD_CLIENT_ID=xxxx
+DISCORD_GUILD_ID=xxxx
+DATABASE_URL=postgresql://botuser:password@localhost:5432/embodied_dating_bot
+CHANNEL_GENERAL_ID=xxxx
+ADMIN_USER_ID=xxxx
+

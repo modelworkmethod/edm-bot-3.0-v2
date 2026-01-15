@@ -1,0 +1,35 @@
+{
+  "name": "embodied-dating-bot-v3",
+  "version": "3.0.0",
+  "description": "Gamified dating improvement bot with XP, raids, duels, course hosting, and auto-engagement tracking",
+  "main": "bot-v3.js",
+  "scripts": {
+    "start": "node src/bot-v3.js",
+    "dev": "NODE_ENV=development node src/bot-v3.js",
+    "prod": "NODE_ENV=production node src/bot-v3.js",
+    "migrate": "node src/database/runMigrations.js",
+    "seed-course": "node src/scripts/seedCourseModules.js",
+    "seed-texting": "node src/scripts/seedTextingScenarios.js",
+    "test": "echo \"No tests yet\" && exit 0"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "gamification",
+    "dating",
+    "coaching"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1",
+    "luxon": "^3.7.2",
+    "node-cron": "^4.2.1",
+    "pg": "^8.11.3",
+    "winston": "^3.11.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

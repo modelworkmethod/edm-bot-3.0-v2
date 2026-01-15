@@ -1,0 +1,53 @@
+Once ENV is plugged in
+
+SYSTEM PROMPT: APEX ENGINEER • CURSOR PROMOTE-AND-GO (SAFE)
+(ZERO OVERWRITES UNLESS ALL GATES PASS • READ-ONLY UNTIL GREEN • FULL LOGGING)
+
+OBJECTIVE
+Re-run the final preflight after I add secrets later. If (and only if) all gates pass, promote the staged entry point and print exact next commands. Otherwise: no changes, only a clear NO-GO with fixes.
+
+GATES (must ALL pass)
+A) Schema SQL present & executable
+   - Require: src/database/migrations/000_initial_schema.sql contains at least 3 CREATE TABLE statements (users, users_stats, daily_records).
+B) .env exists with minimum keys
+   - Require keys: DISCORD_TOKEN, DISCORD_CLIENT_ID, DISCORD_GUILD_ID, DATABASE_URL, CHANNEL_GENERAL_ID, ADMIN_USER_ID.
+C) Init model = Option A (ready.js orchestrates)
+   - Verify ready.js initializes repos, services, commands, presence.
+D) Command index safe
+   - src/commands/index.js includes: stats, leaderboard, admin, barbie, course, help, raids
+   - Excludes ctj, duels, texting if implementations are missing.
+E) FactionService present
+   - src/services/factions/FactionService.js exists (stub is OK).
+
+FILES THIS PROMPT MAY TOUCH
+- Promote candidate → bot-v3.candidate.js → bot-v3.js (ONLY if all gates pass).
+- Write/append: FINAL_ENTRY_READY_CHECK.md (report).
+- No other files modified. No secrets created. No code changes.
+
+EXECUTION STEPS
+1) Validate gates A–E with explicit evidence (line counts, grep-style checks, presence tests).
+2) If ANY gate fails:
+   - Do NOT modify files.
+   - Generate FINAL_ENTRY_READY_CHECK.md with a compact NO-GO matrix and exact, copy-pasteable fixes.
+   - End.
+3) If ALL gates pass:
+   - Promote bot-v3.candidate.js → bot-v3.js.
+   - Generate FINAL_ENTRY_READY_CHECK.md with GO status, promotion log, and a “First Run” command block:
+        npm install
+        npm run migrate
+        npm start
+   - Print a one-line console summary:
+        “GO: entry promoted → bot-v3.js. Next: npm install && npm run migrate && npm start”
+
+OUTPUT FORMAT
+- Always create/append FINAL_ENTRY_READY_CHECK.md with a concise status table:
+  Gate | Status | Evidence | Action (if any)
+- Console echo: single-line summary (GO or NO-GO).
+
+SAFETY
+- No overwrites unless all 5 gates pass.
+- Never print or alter secret values.
+- Keep everything ASCII, concise, and deterministic.
+
+BEGIN
+- Run gate checks now. If .env is not present or incomplete, stop with NO-GO and list the exact missing keys.

@@ -1,0 +1,164 @@
+Prompts For Fix / Discovery of V3 Bot
+
+Boom — your **Mega Fix Orchestrator** is live and doing exactly what we wanted. 🎯
+Here are copy-paste **Cursor prompts** to drive the rest of the process end-to-end with laser precision.
+
+---
+
+# 🔁 Prompt 1 — **MEGA QA SWEEP (re-run + summarize top offenders)**
+
+Use this anytime to refresh discovery, regenerate fix prompts, and surface the next fixes to do.
+
+```
+# GOAL: Re-run full discovery → regenerate fix prompts → print the prioritized queue
+# RULES: Do not change src/* in this prompt. Only run scripts and read reports.
+
+1) Run the latest discovery and orchestrator:
+   - node scripts/dev/mega_discovery.mjs --log=true
+   - node scripts/dev/mega_fix_orchestrator.mjs
+
+2) Parse reports/MEGA_DISCOVERY_REPORT.json and print a compact PRIORITY LIST:
+   - Order: FAIL (desc evidence: commands+services+tables), then WARN (same sort)
+   - For each: show {rank, feature key, status, confidence, counts: cmds/svcs/tbls/jobs/events, TODOs, STUBs}
+   - Limit to top 12
+
+3) For the top 6, print the file path of each feature’s fix prompt:
+   - reports/fix_prompts/<feature>.md
+
+4) Finally, print the locations of:
+   - Master report: reports/MEGA_TEST_REPORT.v2.md
+   - Matrix CSV: scripts/dev/mega_matrix.csv
+```
+
+---
+
+# 🛠️ Prompt 2 — **FIX IMPLEMENTOR (single feature)**
+
+Tell Cursor which feature to fix; it will read that feature’s fix prompt and apply the tasks exactly.
+
+```
+# GOAL: Implement targeted fixes for ONE feature using its generated fix prompt.
+# INPUT: Replace <FEATURE_KEY> with the feature you’re fixing (e.g., "duels", "texting", "factions").
+
+const FEATURE = "<FEATURE_KEY>";
+
+1) Open the fix prompt:
+   - Read: reports/fix_prompts/${FEATURE}.md
+   - Summarize the TASKS sections into an ordered checklist.
+   - For each step, identify exact file paths and whether we’re creating, modifying, or promoting candidate files.
+
+2) Apply fixes EXACTLY as specified:
+   - Promote any candidate files (backup originals with .bak_<timestamp> suffix).
+   - Create missing command/service shells with plain-text replies (no embeds).
+   - Wire exports/imports in src/commands/index.js and src/services/index.js.
+   - Add rate limiter entries where instructed.
+   - Add/update ENV keys ONLY in ENV_TEMPLATE.txt (never overwrite .env values).
+   - Replace STUBs and resolve TODOs referenced by exact file/line if listed.
+
+3) Safety checks before saving:
+   - Run: node -e "require('fs').readdirSync('src').length" (quick sanity)
+   - Lint: (if available) npm run lint || echo "no lint"
+   - Node syntax check for touched files: node -c <file> (or equivalent test command)
+
+4) Regenerate reports to reflect the changes:
+   - node scripts/dev/mega_discovery.mjs --log=true
+   - node scripts/dev/mega_fix_orchestrator.mjs
+
+5) Print the delta for ${FEATURE}:
+   - Old → New status, confidence, counts (cmds/svcs/tbls/jobs/events), TODO/STUB count
+   - Link to updated prompt and master report.
+```
+
+---
+
+# ✅ Prompt 3 — **POST-FIX VALIDATION (smoke + preflight)**
+
+Runs your built-in diagnostics and prints what to check manually in Discord.
+
+```
+# GOAL: Validate the last fix with diagnostics and a manual QA checklist.
+
+1) Run the ops diagnostics:
+   - /preflight section:env         (expect ✅ critical vars set)
+   - /preflight section:db          (expect ✅ SELECT 1 OK, migrations count shown)
+   - /preflight section:assets      (channels/roles OK; factions colors validated)
+   - /preflight section:leaderboards (cache warm vs cold timings)
+   - /preflight section:schedulers  (duels + wingman active)
+   - /preflight dry:true            (wingman dry preview, duels scan)
+
+2) Print a manual QA checklist for Discord:
+   - For commands added/modified by the fix:
+     • /help-commands shows the command
+     • Try command happy-path → plain text response
+     • Try invalid input → unified fail() message
+     • Rate limit kicks in as configured
+   - For services: exercise at least one code path that hits the DB
+   - For schedulers (if relevant): run admin dry-run subcommand
+   - For ENV changes: confirm .env remains untouched; template updated
+
+3) Append a short “Pass/Fail” summary with links:
+   - reports/MEGA_TEST_REPORT.v2.md
+   - reports/fix_prompts/<feature>.md
+```
+
+---
+
+# 🧩 Prompt 4 — **BATCH MODE (fix top N features automatically)**
+
+Hands-free pass that fixes several features in order, one by one, with checkpoints.
+
+```
+# GOAL: Fix the top N offenders in sequence with checkpoints between each.
+
+const N = 3;  // change as needed
+
+1) Refresh discovery + prompts:
+   - node scripts/dev/mega_discovery.mjs --log=true
+   - node scripts/dev/mega_fix_orchestrator.mjs
+
+2) Select the top N features by priority (FAIL first, then WARN), sort by evidence density.
+
+3) For each feature F in that list:
+   - Open reports/fix_prompts/F.md
+   - Execute the FIX IMPLEMENTOR flow for F (see previous prompt)
+   - After each feature:
+     • Re-run discovery + orchestrator
+     • Print the updated status row for F
+     • If F didn’t improve, stop and print an escalation note
+
+4) When done, print an overall delta table:
+   - Feature | Before → After status | Before → After confidence
+   - Total PASS/WARN/FAIL/PRIORITY changes
+```
+
+---
+
+# 🚀 Prompt 5 — **DEPLOY READINESS SNAPSHOT (one screen)**
+
+Concise go/no-go output.
+
+```
+# GOAL: One-screen deploy verdict.
+
+1) node scripts/dev/mega_discovery.mjs
+2) node scripts/dev/mega_fix_orchestrator.mjs
+3) Print:
+   - Totals: PASS / WARN / FAIL / SKIP
+   - List any remaining FAIL with reason (missing cmd/service/db/env/etc.)
+   - Migration gaps (if any) with suggested filenames
+   - ENV delta (missing vars)
+   - Hotspot files (top 5 TODO/STUB counts)
+   - Verdict line: "Ready for production: YES/NO" with a one-sentence rationale
+```
+
+---
+
+## What I recommend next
+
+1. Run **MEGA QA SWEEP** to refresh and reveal the top 6 offenders.
+2. Use **FIX IMPLEMENTOR** on the first item.
+3. Validate with **POST-FIX VALIDATION**.
+4. Repeat or switch to **BATCH MODE** to power through a few at once.
+5. Finish with **DEPLOY READINESS SNAPSHOT** before your mega push.
+
+When you paste the top-6 list here, I’ll hand you tailored fix prompts (already mapped to your repo’s structure) so you can knock them out fast.

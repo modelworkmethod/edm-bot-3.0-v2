@@ -1,0 +1,279 @@
+/**
+ * Instagram Vision Stub
+ * Local vision analysis without external data access
+ * 
+ * ⚠️ STUB IMPLEMENTATION - NO EXTERNAL CALLS
+ * This service provides placeholder vision analysis using only metadata and captions.
+ * No Instagram data is fetched, scraped, or accessed externally.
+ * No image bytes are downloaded or processed.
+ */
+
+const { createLogger } = require('../../utils/logger');
+
+const logger = createLogger('InstagramVisionStub');
+
+class InstagramVisionStub {
+  constructor() {
+    this.analysisCache = new Map();
+  }
+
+  /**
+   * Generate deterministic vision analysis based on metadata only
+   * @param {object} params - Analysis parameters
+   * @param {Array} params.media - Array of media objects [{attachment_url, width, height}]
+   * @param {Array} params.captions - Array of caption strings
+   * @param {string} params.handle - Instagram handle (optional)
+   * @returns {object} Analysis result with summary and openers
+   */
+  async analyze({ media, captions = [], handle = null }) {
+    if (!media || media.length === 0) {
+      throw new Error('At least one media item is required for vision analysis');
+    }
+
+    logger.info('Starting vision stub analysis', { 
+      mediaCount: media.length,
+      captionCount: captions.length,
+      handle 
+    });
+
+    // Generate analysis based on available metadata
+    const insights = this.extractInsights(media, captions);
+    const seed = this.generateSeed(handle || media[0].attachment_url);
+    const analysis = this.generateStubAnalysis(insights, seed, media.length);
+
+    logger.info('Vision stub analysis completed', {
+      mediaCount: media.length,
+      insightsFound: insights.length,
+      summaryLength: analysis.summary.length,
+      openersCount: analysis.openers.length
+    });
+
+    return analysis;
+  }
+
+  /**
+   * Extract insights from media metadata and captions
+   * @param {Array} media - Media objects
+   * @param {Array} captions - Caption strings
+   * @returns {Array} Array of insight strings
+   */
+  extractInsights(media, captions) {
+    const insights = [];
+
+    // Analyze image dimensions
+    const portraits = media.filter(m => m.height && m.width && m.height > m.width).length;
+    const landscapes = media.filter(m => m.height && m.width && m.width > m.height).length;
+    const squares = media.filter(m => m.height && m.width && m.height === m.width).length;
+
+    if (portraits > landscapes) {
+      insights.push('portrait-focused');
+    } else if (landscapes > portraits) {
+      insights.push('landscape-focused');
+    } else if (squares > 0) {
+      insights.push('square-format');
+    }
+
+    // Analyze captions for keywords
+    const allCaptions = captions.filter(c => c).join(' ').toLowerCase();
+    
+    const keywords = {
+      'travel': ['travel', 'trip', 'vacation', 'adventure', 'explore', 'journey'],
+      'fitness': ['gym', 'workout', 'fitness', 'exercise', 'training', 'health'],
+      'food': ['food', 'restaurant', 'dinner', 'brunch', 'cooking', 'recipe', 'coffee'],
+      'art': ['art', 'creative', 'design', 'photo', 'painting', 'music'],
+      'outdoors': ['hiking', 'nature', 'outdoor', 'mountain', 'beach', 'park'],
+      'social': ['friends', 'party', 'celebration', 'hangout', 'gathering']
+    };
+
+    for (const [category, words] of Object.entries(keywords)) {
+      if (words.some(word => allCaptions.includes(word))) {
+        insights.push(category);
+      }
+    }
+
+    return insights;
+  }
+
+  /**
+   * Generate a numeric seed from string
+   * @param {string} input - Input string
+   * @returns {number} Numeric seed
+   */
+  generateSeed(input) {
+    let seed = 0;
+    for (let i = 0; i < input.length; i++) {
+      seed = ((seed << 5) - seed + input.charCodeAt(i)) & 0xffffffff;
+    }
+    return Math.abs(seed);
+  }
+
+  /**
+   * Generate stub vision analysis based on insights and seed
+   * @param {Array} insights - Extracted insights
+   * @param {number} seed - Numeric seed for determinism
+   * @param {number} mediaCount - Number of media items
+   * @returns {object} Analysis with summary and openers
+   */
+  generateStubAnalysis(insights, seed, mediaCount) {
+    // Build summary based on insights
+    let summary = `(Stub) Analyzed ${mediaCount} screenshot(s) without external data access. `;
+
+    if (insights.length === 0) {
+      summary += 'Based on image metadata only, appears to be standard Instagram content. ';
+    } else {
+      const categories = insights.filter(i => !i.includes('-'));
+      if (categories.length > 0) {
+        summary += `Detected themes: ${categories.join(', ')}. `;
+      }
+
+      const formats = insights.filter(i => i.includes('-'));
+      if (formats.length > 0) {
+        summary += `Image format: ${formats.join(', ')}. `;
+      }
+    }
+
+    summary += 'This is a deterministic local analysis without actual image processing.';
+
+    // Generate openers based on insights
+    const openers = this.selectOpeners(insights, seed);
+
+    return {
+      summary,
+      openers,
+      disclaimer: 'Generated by local vision stub (no external data accessed)',
+      lastAnalyzed: new Date().toISOString(),
+      mediaAnalyzed: mediaCount,
+      insightsDetected: insights
+    };
+  }
+
+  /**
+   * Select appropriate openers based on insights
+   * @param {Array} insights - Detected insights
+   * @param {number} seed - Seed for deterministic selection
+   * @returns {Array} Array of opener suggestions
+   */
+  selectOpeners(insights, seed) {
+    const openersByCategory = {
+      travel: [
+        "What's the most spontaneous trip you've ever taken?",
+        "Where's your next adventure on the bucket list?",
+        "I love exploring new places—what's been your favorite travel memory?"
+      ],
+      fitness: [
+        "Your dedication to fitness is inspiring—what keeps you motivated?",
+        "What's your go-to workout when you need a mood boost?",
+        "Gym buddies always make it better—ever need a workout partner?"
+      ],
+      food: [
+        "You've got great taste—what's the best restaurant you've discovered lately?",
+        "I'm always looking for new food spots—any hidden gems you'd recommend?",
+        "Coffee or brunch first? What's your weekend ritual?"
+      ],
+      art: [
+        "Your creative side really shows—what inspires you most?",
+        "Art and creativity are so attractive—what's your creative outlet?",
+        "I love seeing someone's artistic passion—how'd you get into it?"
+      ],
+      outdoors: [
+        "There's something special about being outdoors—what's your favorite spot?",
+        "Hiking buddies make the best adventures—where should we go?",
+        "Nature lover here too—what's your perfect outdoor day look like?"
+      ],
+      social: [
+        "You seem like someone who brings great energy—how do you like to spend time with friends?",
+        "What's the most fun you've had recently with your crew?",
+        "You've got great social vibes—what's your ideal weekend plan?"
+      ],
+      default: [
+        "Your profile has such good energy—what gets you most excited lately?",
+        "I love getting to know people beyond the surface—what's something you're passionate about?",
+        "Random question: if you had zero plans this weekend, what would you do?",
+        "What's something you're really proud of that most people don't know about?",
+        "Your vibe caught my attention—what's been the highlight of your week?"
+      ]
+    };
+
+    // Find matching categories
+    const matchedCategories = insights.filter(i => openersByCategory[i]);
+    
+    // Select openers deterministically
+    const selectedOpeners = [];
+    const availableOpeners = [];
+
+    // Add category-specific openers
+    matchedCategories.forEach(category => {
+      availableOpeners.push(...openersByCategory[category]);
+    });
+
+    // Add default openers
+    availableOpeners.push(...openersByCategory.default);
+
+    // Select 2-3 unique openers using seed
+    const count = 2 + (seed % 2); // 2 or 3 openers
+    const indices = [];
+    
+    for (let i = 0; i < count && i < availableOpeners.length; i++) {
+      let index = (seed + i * 7) % availableOpeners.length;
+      
+      // Ensure uniqueness
+      while (indices.includes(index)) {
+        index = (index + 1) % availableOpeners.length;
+      }
+      
+      indices.push(index);
+      selectedOpeners.push(availableOpeners[index]);
+    }
+
+    return selectedOpeners.length > 0 ? selectedOpeners : openersByCategory.default.slice(0, 2);
+  }
+
+  /**
+   * Get cached analysis if available
+   * @param {string} cacheKey - Cache key
+   * @returns {object|null} Cached analysis or null
+   */
+  getCachedAnalysis(cacheKey) {
+    return this.analysisCache.get(cacheKey) || null;
+  }
+
+  /**
+   * Cache analysis result
+   * @param {string} cacheKey - Cache key
+   * @param {object} analysis - Analysis result
+   */
+  cacheAnalysis(cacheKey, analysis) {
+    this.analysisCache.set(cacheKey, {
+      ...analysis,
+      cachedAt: new Date().toISOString()
+    });
+
+    // Limit cache size
+    if (this.analysisCache.size > 100) {
+      const firstKey = this.analysisCache.keys().next().value;
+      this.analysisCache.delete(firstKey);
+    }
+  }
+
+  /**
+   * Clear cache (for testing or memory management)
+   */
+  clearCache() {
+    this.analysisCache.clear();
+    logger.info('Vision analysis cache cleared');
+  }
+
+  /**
+   * Get cache statistics
+   * @returns {object} Cache stats
+   */
+  getCacheStats() {
+    return {
+      size: this.analysisCache.size,
+      keys: Array.from(this.analysisCache.keys())
+    };
+  }
+}
+
+// Export singleton instance
+module.exports = new InstagramVisionStub();

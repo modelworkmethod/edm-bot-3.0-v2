@@ -1,0 +1,252 @@
+# =============================================================================
+# EMBODIED DATING MASTERMIND BOT v3.0 - ENVIRONMENT VARIABLES TEMPLATE
+# =============================================================================
+# Copy this file to .env and fill in your actual values
+# DO NOT commit .env files to version control (contains secrets)
+# =============================================================================
+
+# =============================================================================
+# 🔴 REQUIRED VARIABLES (6) - Bot won't start without these
+# =============================================================================
+
+# Discord Bot Configuration
+DISCORD_TOKEN=your_bot_token_here
+DISCORD_CLIENT_ID=your_application_id_here
+DISCORD_GUILD_ID=your_server_id_here
+
+# Database Connection (Primary)
+DATABASE_URL=postgresql://botuser:password@localhost:5432/embodied_dating_bot
+
+# Core Channel
+CHANNEL_GENERAL_ID=your_general_channel_id
+
+# Admin User
+ADMIN_USER_ID=your_discord_user_id
+
+# =============================================================================
+# 🟡 RECOMMENDED CHANNELS (12) - For full functionality
+# =============================================================================
+
+# Main Bot Channels
+CHANNEL_INPUT_ID=stats_input_channel_id
+CHANNEL_LEADERBOARD_ID=leaderboard_channel_id
+CHANNEL_SCORECARD_ID=scorecard_channel_id
+JOURNAL_CHANNEL_ID=journal_channel_id
+WINS_CHANNEL_ID=wins_announcements_channel_id
+
+# Feature-Specific Channels (Visual Interface)
+CHANNEL_BARBIE_ID=barbie_list_channel_id
+CHANNEL_RAIDS_ID=boss_raids_channel_id
+CHANNEL_COACHING_ID=coaching_command_center_id
+CHANNEL_TEXTING_ID=texting_simulator_channel_id
+CHANNEL_DUELS_ID=duels_arena_channel_id
+
+# Tensey Bot Channels
+TENSEYLIST_CHANNEL_ID=tensey_list_channel_id
+TENSEY_LEADERBOARD_CHANNEL_ID=tensey_leaderboard_channel_id
+
+# =============================================================================
+# 🟡 FACTION CHANNELS (2) - For faction-specific features
+# =============================================================================
+
+FACTION_CHANNEL_LUMINARCHS=luminarchs_faction_channel_id
+FACTION_CHANNEL_NOCTIVORES=noctivores_faction_channel_id
+
+# =============================================================================
+# 🟡 FREE EVENT CHANNEL (1) - For special announcements
+# =============================================================================
+
+FREE_EVENT_ANNOUNCE_CHANNEL_ID=free_event_announcements_channel_id
+
+# =============================================================================
+# 🔵 ROLE IDS (15) - Discord roles for tier system and factions
+# =============================================================================
+
+# Tier Roles (11) - User progression levels
+ROLE_AWKWARD_INITIATE=role_id_here
+ROLE_SOCIAL_SQUIRE=role_id_here
+ROLE_BOLD_EXPLORER=role_id_here
+ROLE_MAGNETIC_CHALLENGER=role_id_here
+ROLE_AUDACIOUS_KNIGHT=role_id_here
+ROLE_CHARISMA_VANGUARD=role_id_here
+ROLE_SEDUCTION_SAGE=role_id_here
+ROLE_EMBODIMENT_WARLORD=role_id_here
+ROLE_FLIRTATION_OVERLORD=role_id_here
+ROLE_REALITY_ARCHITECT=role_id_here
+ROLE_GALACTIC_SEXY_BASTARD=role_id_here
+
+# Faction Roles (2)
+ROLE_FACTION_LUMINARCHS=role_id_here
+ROLE_FACTION_NOCTIVORES=role_id_here
+
+# Rank Color Roles (3) - Special visual indicators
+ROLE_RANK_TOP1_COLOR=role_id_here
+ROLE_RANK_TOP3_COLOR=role_id_here
+ROLE_RANK_TOP10_COLOR=role_id_here
+
+# =============================================================================
+# 🟢 CORE FEATURES (4) - Basic bot functionality
+# =============================================================================
+
+# Logging Level (debug, info, warn, error)
+LOG_LEVEL=info
+
+# Emergency booking link for users
+EMERGENCY_CALL_BOOKING_LINK=https://calendly.com/your-link
+
+# Feature toggles
+FACTION_ANNOUNCEMENTS_ENABLED=true
+FREE_EVENT_LEVEL=60
+
+# =============================================================================
+# 🔵 DATABASE SSL (2) - Optional SSL configuration
+# =============================================================================
+
+# Enable SSL connection to database
+DATABASE_SSL=false
+# Path to CA certificate (if DATABASE_SSL=true)
+CA_CERT_PATH=/path/to/certificate.pem
+
+# =============================================================================
+# 🟢 DATABASE CREDENTIALS ALTERNATIVE (5) - If DATABASE_URL not used
+# =============================================================================
+
+# Individual database connection parameters
+DATABASE_HOST=localhost
+DATABASE_PORT=5432
+DATABASE_NAME=embodied_dating_bot
+DATABASE_USER=botuser
+DATABASE_PASSWORD=your_password
+
+# =============================================================================
+# 🔴 PHASE 11 SECURITY (4) - Security and monitoring features
+# =============================================================================
+
+# Health check monitoring
+SECOPS_ENABLE_HEALTHCHECKS=false
+SECOPS_HEALTHCHECK_INTERVAL_MIN=5
+
+# Automated backups
+SECOPS_ENABLE_AUTOBACKUP=false
+
+# Content moderation enforcement
+SECOPS_ENFORCE_MODERATION=false
+
+# =============================================================================
+# 🔴 PHASE 10 AI SERVICES (12) - External AI and automation services
+# =============================================================================
+
+# Claude AI (Anthropic)
+ANTHROPIC_API_KEY=your_anthropic_key_here
+
+# ElevenLabs Voice Generation
+ELEVENLABS_API_KEY=your_elevenlabs_key_here
+ELEVENLABS_VOICE_ID=your_voice_clone_id_here
+
+# AWS S3 (for voice file storage)
+S3_BUCKET=your_s3_bucket_name
+
+# Airtable Integration
+AIRTABLE_API_KEY=your_airtable_key_here
+AIRTABLE_BASE_ID=your_airtable_base_id_here
+
+# SendGrid Email Service
+SENDGRID_API_KEY=your_sendgrid_key_here
+FROM_EMAIL=coach@yourdomain.com
+FROM_NAME=Your Name
+
+# Zapier Webhooks
+ZAPIER_WEBHOOK_KEY=your_zapier_webhook_key_here
+
+# Typeform Integration
+TYPEFORM_URL=https://your-typeform-url
+
+# Free Event Banner
+FREE_EVENT_BANNER_URL=https://your-banner-url
+
+# =============================================================================
+# 🔴 TENSEY BOT (13) - Separate Tensey Bot configuration
+# =============================================================================
+
+# Discord Configuration (Required for Tensey Bot)
+TENSEY_DISCORD_TOKEN=your_tensey_bot_token_here
+TENSEY_CLIENT_ID=your_tensey_application_id_here
+TENSEY_GUILD_ID=your_server_id_here
+
+# Database Configuration (Required - Must match main bot)
+DB_HOST=localhost
+DB_PORT=5432
+DB_NAME=embodied_dating_bot
+DB_USER=botuser
+DB_PASSWORD=your_password
+
+# Behavior Settings (Optional)
+TENSEY_ANNOUNCE_ENABLED=1
+PIN_TENSEY_BUTTON=true
+PIN_LEADERBOARD_BUTTON=true
+XP_AWARD_DELAY_SECONDS=60
+
+# Banner URLs (Optional)
+BANNER_URL_OPEN_BUTTON=https://your-banner-url
+BANNER_URL_CHECKLIST=https://your-banner-url
+BANNER_URL_LEADERBOARD=https://your-banner-url
+
+# =============================================================================
+# 🔴 TENSEY INTEGRATION (8) - Main bot Tensey integration settings
+# =============================================================================
+
+# Tensey Bot Integration
+TENSEY_DISCORD_TOKEN=your_tensey_bot_token_here
+TENSEY_CLIENT_ID=your_tensey_application_id_here
+TENSEY_ANNOUNCE_ENABLED=true
+TENSEY_ANNOUNCE_XP=false
+TENSEY_ANNOUNCE_THROTTLE_MS=3000
+PIN_TENSEY_BUTTON=false
+PIN_LEADERBOARD_BUTTON=false
+
+# =============================================================================
+# 🟢 NODE ENVIRONMENT (1) - Runtime environment
+# =============================================================================
+
+# Environment mode (development, staging, production)
+NODE_ENV=development
+
+# =============================================================================
+# 📋 SETUP CHECKLIST
+# =============================================================================
+# 
+# 1. Copy this file to .env
+# 2. Fill in all REQUIRED variables (6)
+# 3. Get Discord IDs using Developer Mode:
+#    - Server ID: Right-click server name → Copy Server ID
+#    - Channel IDs: Right-click channel → Copy Channel ID  
+#    - User ID: Right-click user → Copy User ID
+# 4. Set up PostgreSQL database
+# 5. Run migrations: npm run migrate
+# 6. Test with: npm run dev
+#
+# =============================================================================
+# 🔗 USEFUL COMMANDS
+# =============================================================================
+# 🤝 WINGMAN MATCHER (11) - Weekly pairing system
+# =============================================================================
+
+# Wingman Matcher (weekly pairs)
+WINGMAN_MATCHUPS_CHANNEL_ID=
+WINGMAN_TZ=America/New_York
+WINGMAN_SCHEDULE_DAY=SU        # SU=Sunday (ISO-8601-1 based)
+WINGMAN_SCHEDULE_TIME=20:00    # 24h local to WINGMAN_TZ
+WINGMAN_LOOKBACK_WEEKS=8
+WINGMAN_ELIGIBLE_ROLE_ID=      # optional: restrict to a specific role
+WINGMAN_MIN_LEVEL=0            # optional: minimum level to be eligible
+WINGMAN_PAIR_ODD_MODE=triad    # triad | carry | skip
+WINGMAN_PREFER_CROSS_FACTION=false
+
+# =============================================================================
+#
+# Validate environment: node -e "require('./src/config/environment').validateEnvironment()"
+# Check database: psql $DATABASE_URL
+# Run migrations: npm run migrate
+# Start bot: npm run dev
+#
+# =============================================================================

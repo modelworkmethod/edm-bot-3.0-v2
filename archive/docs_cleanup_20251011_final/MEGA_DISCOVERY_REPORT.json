@@ -1,0 +1,3904 @@
+{
+  "timestamp": "2025-10-08T22:56:14.998Z",
+  "config": {
+    "dry": true,
+    "json": true,
+    "log": false,
+    "maxFiles": 5000
+  },
+  "summary": {
+    "filesScanned": 149,
+    "featuresInferred": 65,
+    "commands": 33,
+    "services": 56,
+    "jobs": 2,
+    "migrations": 18
+  },
+  "features": [
+    {
+      "key": "barbie",
+      "name": "Barbie",
+      "files": [
+        "src\\commands\\barbie\\barbie.js",
+        "src\\commands\\barbie\\index.js",
+        "src\\services\\barbie\\BarbieListManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\barbie\\barbie.js",
+          "src\\commands\\barbie\\index.js"
+        ],
+        "services": [
+          "src\\services\\barbie\\BarbieListManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [
+          "barbie_list"
+        ],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.8999999999999999,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /barbie → 1 service(s): BarbieListManager → tables: [barbie_list]"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 1,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /barbie → 1 service(s): BarbieListManager → tables: [barbie_list]"
+    },
+    {
+      "key": "ctj",
+      "name": "Ctj",
+      "files": [
+        "src\\commands\\ctj\\breakthroughs.js",
+        "src\\commands\\ctj\\index.js",
+        "src\\commands\\ctj\\journal.js",
+        "src\\services\\ctj\\CTJAnalyzer.js",
+        "src\\services\\ctj\\CTJMonitor.js",
+        "src\\services\\ctj\\CTJService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\ctj\\breakthroughs.js",
+          "src\\commands\\ctj\\index.js",
+          "src\\commands\\ctj\\journal.js"
+        ],
+        "services": [
+          "src\\services\\ctj\\CTJAnalyzer.js",
+          "src\\services\\ctj\\CTJMonitor.js",
+          "src\\services\\ctj\\CTJService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [
+          "ctj_entries"
+        ],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.8999999999999999,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /ctj → 3 service(s): CTJAnalyzer, CTJMonitor... → tables: [ctj_entries]"
+      ],
+      "counts": {
+        "commands": 3,
+        "services": 3,
+        "jobs": 0,
+        "events": 0,
+        "tables": 1,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /ctj → 3 service(s): CTJAnalyzer, CTJMonitor... → tables: [ctj_entries]"
+    },
+    {
+      "key": "index-js",
+      "name": "Index-js",
+      "files": [
+        "src\\commands\\index.js",
+        "src\\services\\index.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\index.js"
+        ],
+        "services": [
+          "src\\services\\index.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /index-js → 1 service(s): index"
+      ],
+      "counts": {
+        "commands": 1,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /index-js → 1 service(s): index"
+    },
+    {
+      "key": "course",
+      "name": "Course",
+      "files": [
+        "src\\commands\\course\\course.js",
+        "src\\commands\\course\\index.js",
+        "src\\services\\course\\CourseManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\course\\course.js",
+          "src\\commands\\course\\index.js"
+        ],
+        "services": [
+          "src\\services\\course\\CourseManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /course → 1 service(s): CourseManager"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /course → 1 service(s): CourseManager"
+    },
+    {
+      "key": "duels",
+      "name": "Duels",
+      "files": [
+        "src\\commands\\duels\\duel.js",
+        "src\\commands\\duels\\index.js",
+        "src\\services\\duels\\DuelManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\duels\\duel.js",
+          "src\\commands\\duels\\index.js"
+        ],
+        "services": [
+          "src\\services\\duels\\DuelManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /duels → 1 service(s): DuelManager"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /duels → 1 service(s): DuelManager"
+    },
+    {
+      "key": "factions",
+      "name": "Factions",
+      "files": [
+        "src\\commands\\factions\\faction-admin.js",
+        "src\\commands\\factions\\index.js",
+        "src\\services\\factions\\FactionBalancer.js",
+        "src\\services\\factions\\FactionService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\factions\\faction-admin.js",
+          "src\\commands\\factions\\index.js"
+        ],
+        "services": [
+          "src\\services\\factions\\FactionBalancer.js",
+          "src\\services\\factions\\FactionService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /factions → 2 service(s): FactionBalancer, FactionService"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /factions → 2 service(s): FactionBalancer, FactionService"
+    },
+    {
+      "key": "leaderboard",
+      "name": "Leaderboard",
+      "files": [
+        "src\\commands\\leaderboard\\faction-stats.js",
+        "src\\commands\\leaderboard\\index.js",
+        "src\\commands\\leaderboard\\leaderboard.candidate.js",
+        "src\\commands\\leaderboard\\leaderboard.js",
+        "src\\services\\leaderboard\\LeaderboardService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\leaderboard\\faction-stats.js",
+          "src\\commands\\leaderboard\\index.js",
+          "src\\commands\\leaderboard\\leaderboard.candidate.js",
+          "src\\commands\\leaderboard\\leaderboard.js"
+        ],
+        "services": [
+          "src\\services\\leaderboard\\LeaderboardService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": [
+          "src\\commands\\leaderboard\\leaderboard.candidate.js"
+        ]
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /leaderboard → 1 service(s): LeaderboardService"
+      ],
+      "counts": {
+        "commands": 4,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 1,
+        "markers": 0
+      },
+      "primaryFlow": "User → /leaderboard → 1 service(s): LeaderboardService"
+    },
+    {
+      "key": "ops",
+      "name": "Ops",
+      "files": [
+        "src\\commands\\ops\\index.js",
+        "src\\commands\\ops\\preflight.js",
+        "src\\commands\\ops\\status.js",
+        "src\\services\\ops\\PreflightService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\ops\\index.js",
+          "src\\commands\\ops\\preflight.js",
+          "src\\commands\\ops\\status.js"
+        ],
+        "services": [
+          "src\\services\\ops\\PreflightService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /ops → 1 service(s): PreflightService"
+      ],
+      "counts": {
+        "commands": 3,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /ops → 1 service(s): PreflightService"
+    },
+    {
+      "key": "raids",
+      "name": "Raids",
+      "files": [
+        "src\\commands\\raids\\index.js",
+        "src\\commands\\raids\\raid-status.js",
+        "src\\services\\raids\\RaidManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\raids\\index.js",
+          "src\\commands\\raids\\raid-status.js"
+        ],
+        "services": [
+          "src\\services\\raids\\RaidManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /raids → 1 service(s): RaidManager"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /raids → 1 service(s): RaidManager"
+    },
+    {
+      "key": "stats",
+      "name": "Stats",
+      "files": [
+        "src\\commands\\stats\\index.js",
+        "src\\commands\\stats\\scorecard.js",
+        "src\\commands\\stats\\stats-days.js",
+        "src\\commands\\stats\\stats-delete.js",
+        "src\\commands\\stats\\stats-edit.js",
+        "src\\commands\\stats\\submit-past-stats.js",
+        "src\\commands\\stats\\submit-stats.js",
+        "src\\services\\stats\\StatsEditService.js",
+        "src\\services\\stats\\StatsProcessor.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\stats\\index.js",
+          "src\\commands\\stats\\scorecard.js",
+          "src\\commands\\stats\\stats-days.js",
+          "src\\commands\\stats\\stats-delete.js",
+          "src\\commands\\stats\\stats-edit.js",
+          "src\\commands\\stats\\submit-past-stats.js",
+          "src\\commands\\stats\\submit-stats.js"
+        ],
+        "services": [
+          "src\\services\\stats\\StatsEditService.js",
+          "src\\services\\stats\\StatsProcessor.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /stats → 2 service(s): StatsEditService, StatsProcessor"
+      ],
+      "counts": {
+        "commands": 7,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /stats → 2 service(s): StatsEditService, StatsProcessor"
+    },
+    {
+      "key": "texting",
+      "name": "Texting",
+      "files": [
+        "src\\commands\\texting\\index.js",
+        "src\\commands\\texting\\texting-finish.js",
+        "src\\commands\\texting\\texting-practice.js",
+        "src\\commands\\texting\\texting-send.js",
+        "src\\services\\texting\\TextingService.js",
+        "src\\services\\texting\\TextingSimulator.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\texting\\index.js",
+          "src\\commands\\texting\\texting-finish.js",
+          "src\\commands\\texting\\texting-practice.js",
+          "src\\commands\\texting\\texting-send.js"
+        ],
+        "services": [
+          "src\\services\\texting\\TextingService.js",
+          "src\\services\\texting\\TextingSimulator.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /texting → 2 service(s): TextingService, TextingSimulator"
+      ],
+      "counts": {
+        "commands": 4,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /texting → 2 service(s): TextingService, TextingSimulator"
+    },
+    {
+      "key": "wingman",
+      "name": "Wingman",
+      "files": [
+        "src\\commands\\wingman\\index.js",
+        "src\\commands\\wingman\\wingman-admin.js",
+        "src\\services\\wingman\\WingmanMatcher.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\wingman\\index.js",
+          "src\\commands\\wingman\\wingman-admin.js"
+        ],
+        "services": [
+          "src\\services\\wingman\\WingmanMatcher.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.7,
+      "status": "PASS",
+      "statusReason": "Command + Service implemented",
+      "flows": [
+        "User → /wingman → 1 service(s): WingmanMatcher"
+      ],
+      "counts": {
+        "commands": 2,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /wingman → 1 service(s): WingmanMatcher"
+    },
+    {
+      "key": "discord",
+      "name": "Discord",
+      "files": [
+        "src\\config\\discord.js",
+        "src\\services\\discord\\ChannelService.js",
+        "src\\services\\discord\\index.js",
+        "src\\services\\discord\\MessageService.js",
+        "src\\services\\discord\\RoleService.js",
+        "src\\services\\discord\\RoleSync.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\discord\\ChannelService.js",
+          "src\\services\\discord\\index.js",
+          "src\\services\\discord\\MessageService.js",
+          "src\\services\\discord\\RoleService.js",
+          "src\\services\\discord\\RoleSync.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [
+          "discord_id"
+        ],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.5,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 5 service(s): ChannelService, index... → tables: [discord_id]"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 5,
+        "jobs": 0,
+        "events": 0,
+        "tables": 1,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 5 service(s): ChannelService, index... → tables: [discord_id]"
+    },
+    {
+      "key": "user",
+      "name": "User",
+      "files": [
+        "src\\services\\user\\ArchetypeService.js",
+        "src\\services\\user\\index.js",
+        "src\\services\\user\\UserService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\user\\ArchetypeService.js",
+          "src\\services\\user\\index.js",
+          "src\\services\\user\\UserService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [
+          "user_id",
+          "users"
+        ],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.5,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 3 service(s): ArchetypeService, index... → tables: [user_id, users]"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 3,
+        "jobs": 0,
+        "events": 0,
+        "tables": 2,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 3 service(s): ArchetypeService, index... → tables: [user_id, users]"
+    },
+    {
+      "key": "commandregistry-js",
+      "name": "Commandregistry-js",
+      "files": [
+        "src\\commands\\commandRegistry.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\commandRegistry.js"
+        ],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.4,
+      "status": "WARN",
+      "statusReason": "Missing service",
+      "flows": [
+        "User → /commandregistry-js"
+      ],
+      "counts": {
+        "commands": 1,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /commandregistry-js"
+    },
+    {
+      "key": "admin",
+      "name": "Admin",
+      "files": [
+        "src\\commands\\admin\\adjust-xp.js",
+        "src\\commands\\admin\\admin.js",
+        "src\\commands\\admin\\coaching-dashboard.js",
+        "src\\commands\\admin\\coaching-insights.js",
+        "src\\commands\\admin\\course-admin.js",
+        "src\\commands\\admin\\dynamic-commands.js",
+        "src\\commands\\admin\\index.js",
+        "src\\commands\\admin\\reset-stats.js",
+        "src\\commands\\admin\\security.js",
+        "src\\commands\\admin\\set-double-xp.js",
+        "src\\commands\\admin\\start-raid.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\admin\\adjust-xp.js",
+          "src\\commands\\admin\\admin.js",
+          "src\\commands\\admin\\coaching-dashboard.js",
+          "src\\commands\\admin\\coaching-insights.js",
+          "src\\commands\\admin\\course-admin.js",
+          "src\\commands\\admin\\dynamic-commands.js",
+          "src\\commands\\admin\\index.js",
+          "src\\commands\\admin\\reset-stats.js",
+          "src\\commands\\admin\\security.js",
+          "src\\commands\\admin\\set-double-xp.js",
+          "src\\commands\\admin\\start-raid.js"
+        ],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.4,
+      "status": "WARN",
+      "statusReason": "Missing service",
+      "flows": [
+        "User → /admin"
+      ],
+      "counts": {
+        "commands": 11,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /admin"
+    },
+    {
+      "key": "help",
+      "name": "Help",
+      "files": [
+        "src\\commands\\help\\help-commands.js",
+        "src\\commands\\help\\help.js",
+        "src\\commands\\help\\index.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [
+          "src\\commands\\help\\help-commands.js",
+          "src\\commands\\help\\help.js",
+          "src\\commands\\help\\index.js"
+        ],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.4,
+      "status": "WARN",
+      "statusReason": "Missing service",
+      "flows": [
+        "User → /help"
+      ],
+      "counts": {
+        "commands": 3,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "User → /help"
+    },
+    {
+      "key": "events",
+      "name": "Events",
+      "files": [
+        "src\\services\\events\\DoubleXPManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\events\\DoubleXPManager.js"
+        ],
+        "jobs": [],
+        "events": [
+          "src\\services\\events\\DoubleXPManager.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.35,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): DoubleXPManager → 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): DoubleXPManager → 1 event(s)"
+    },
+    {
+      "key": "ai",
+      "name": "Ai",
+      "files": [
+        "src\\services\\ai\\ClaudeAnalyzer.js",
+        "src\\services\\ai\\ElevenLabsVoice.js",
+        "src\\services\\ai\\InstagramAnalyzerStub.js",
+        "src\\services\\ai\\InstagramVisionStub.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\ai\\ClaudeAnalyzer.js",
+          "src\\services\\ai\\ElevenLabsVoice.js",
+          "src\\services\\ai\\InstagramAnalyzerStub.js",
+          "src\\services\\ai\\InstagramVisionStub.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 4 service(s): ClaudeAnalyzer, ElevenLabsVoice..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 4,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 4 service(s): ClaudeAnalyzer, ElevenLabsVoice..."
+    },
+    {
+      "key": "airtable",
+      "name": "Airtable",
+      "files": [
+        "src\\services\\airtable\\AirtableClient.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\airtable\\AirtableClient.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): AirtableClient"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): AirtableClient"
+    },
+    {
+      "key": "analytics",
+      "name": "Analytics",
+      "files": [
+        "src\\services\\analytics\\ChartGenerator.js",
+        "src\\services\\analytics\\EngagementTracker.js",
+        "src\\services\\analytics\\InterventionGenerator.js",
+        "src\\services\\analytics\\PatternDetector.js",
+        "src\\services\\analytics\\ProgressTracker.js",
+        "src\\services\\analytics\\RiskScorer.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\analytics\\ChartGenerator.js",
+          "src\\services\\analytics\\EngagementTracker.js",
+          "src\\services\\analytics\\InterventionGenerator.js",
+          "src\\services\\analytics\\PatternDetector.js",
+          "src\\services\\analytics\\ProgressTracker.js",
+          "src\\services\\analytics\\RiskScorer.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 6 service(s): ChartGenerator, EngagementTracker..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 6,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 6 service(s): ChartGenerator, EngagementTracker..."
+    },
+    {
+      "key": "automation",
+      "name": "Automation",
+      "files": [
+        "src\\services\\automation\\OnboardingOrchestrator.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\automation\\OnboardingOrchestrator.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): OnboardingOrchestrator"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): OnboardingOrchestrator"
+    },
+    {
+      "key": "backup",
+      "name": "Backup",
+      "files": [
+        "src\\services\\backup\\BackupManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\backup\\BackupManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): BackupManager"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): BackupManager"
+    },
+    {
+      "key": "compliance",
+      "name": "Compliance",
+      "files": [
+        "src\\services\\compliance\\GDPRExporter.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\compliance\\GDPRExporter.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): GDPRExporter"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): GDPRExporter"
+    },
+    {
+      "key": "email",
+      "name": "Email",
+      "files": [
+        "src\\services\\email\\EmailService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\email\\EmailService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 1 service(s): EmailService"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 1,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 1 service(s): EmailService"
+    },
+    {
+      "key": "engagement",
+      "name": "Engagement",
+      "files": [
+        "src\\services\\engagement\\ChatEngagementMonitor.js",
+        "src\\services\\engagement\\WinsMonitor.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\engagement\\ChatEngagementMonitor.js",
+          "src\\services\\engagement\\WinsMonitor.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 2 service(s): ChatEngagementMonitor, WinsMonitor"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 2 service(s): ChatEngagementMonitor, WinsMonitor"
+    },
+    {
+      "key": "monitoring",
+      "name": "Monitoring",
+      "files": [
+        "src\\services\\monitoring\\AutomationLogger.js",
+        "src\\services\\monitoring\\HealthCheck.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\monitoring\\AutomationLogger.js",
+          "src\\services\\monitoring\\HealthCheck.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 2 service(s): AutomationLogger, HealthCheck"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 2 service(s): AutomationLogger, HealthCheck"
+    },
+    {
+      "key": "notifications",
+      "name": "Notifications",
+      "files": [
+        "src\\services\\notifications\\AnnouncementQueue.js",
+        "src\\services\\notifications\\AutoReminderService.js",
+        "src\\services\\notifications\\index.js",
+        "src\\services\\notifications\\ReminderService.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\notifications\\AnnouncementQueue.js",
+          "src\\services\\notifications\\AutoReminderService.js",
+          "src\\services\\notifications\\index.js",
+          "src\\services\\notifications\\ReminderService.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 4 service(s): AnnouncementQueue, AutoReminderService..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 4,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 4 service(s): AnnouncementQueue, AutoReminderService..."
+    },
+    {
+      "key": "onboarding",
+      "name": "Onboarding",
+      "files": [
+        "src\\services\\onboarding\\OnboardingChatbot.js",
+        "src\\services\\onboarding\\OnboardingTemplate.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\onboarding\\OnboardingChatbot.js",
+          "src\\services\\onboarding\\OnboardingTemplate.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 2 service(s): OnboardingChatbot, OnboardingTemplate"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 2,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 2 service(s): OnboardingChatbot, OnboardingTemplate"
+    },
+    {
+      "key": "security",
+      "name": "Security",
+      "files": [
+        "src\\services\\security\\AuditLogger.js",
+        "src\\services\\security\\ContentModerator.js",
+        "src\\services\\security\\WarningSystem.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\security\\AuditLogger.js",
+          "src\\services\\security\\ContentModerator.js",
+          "src\\services\\security\\WarningSystem.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 3 service(s): AuditLogger, ContentModerator..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 3,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 3 service(s): AuditLogger, ContentModerator..."
+    },
+    {
+      "key": "tensey",
+      "name": "Tensey",
+      "files": [
+        "src\\services\\tensey\\index.js",
+        "src\\services\\tensey\\TenseyIntegration.js",
+        "src\\services\\tensey\\TenseyManager.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\tensey\\index.js",
+          "src\\services\\tensey\\TenseyIntegration.js",
+          "src\\services\\tensey\\TenseyManager.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 3 service(s): index, TenseyIntegration..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 3,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 3 service(s): index, TenseyIntegration..."
+    },
+    {
+      "key": "xp",
+      "name": "Xp",
+      "files": [
+        "src\\services\\xp\\index.js",
+        "src\\services\\xp\\LevelCalculator.js",
+        "src\\services\\xp\\MultiplierService.js",
+        "src\\services\\xp\\SecondaryXPProcessor.js",
+        "src\\services\\xp\\XPCalculator.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [
+          "src\\services\\xp\\index.js",
+          "src\\services\\xp\\LevelCalculator.js",
+          "src\\services\\xp\\MultiplierService.js",
+          "src\\services\\xp\\SecondaryXPProcessor.js",
+          "src\\services\\xp\\XPCalculator.js"
+        ],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.3,
+      "status": "WARN",
+      "statusReason": "Missing command",
+      "flows": [
+        "Service-only feature → 5 service(s): index, LevelCalculator..."
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 5,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "Service-only feature → 5 service(s): index, LevelCalculator..."
+    },
+    {
+      "key": "guildmemberadd",
+      "name": "Guildmemberadd",
+      "files": [
+        "src\\events\\guildMemberAdd.candidate.js",
+        "src\\events\\guildMemberAdd.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\guildMemberAdd.candidate.js",
+          "src\\events\\guildMemberAdd.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": [
+          "src\\events\\guildMemberAdd.candidate.js"
+        ]
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 2 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 2,
+        "tables": 0,
+        "env": 0,
+        "candidates": 1,
+        "markers": 0
+      },
+      "primaryFlow": "→ 2 event(s)"
+    },
+    {
+      "key": "messagecreate",
+      "name": "Messagecreate",
+      "files": [
+        "src\\events\\messageCreate.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\messageCreate.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "ready",
+      "name": "Ready",
+      "files": [
+        "src\\events\\ready.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\ready.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "duelsfinalizer",
+      "name": "Duelsfinalizer",
+      "files": [
+        "src\\jobs\\duelsFinalizer.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [
+          "src\\jobs\\duelsFinalizer.js"
+        ],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ jobs: duelsFinalizer"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 1,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ jobs: duelsFinalizer"
+    },
+    {
+      "key": "wingmanscheduler",
+      "name": "Wingmanscheduler",
+      "files": [
+        "src\\jobs\\wingmanScheduler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [
+          "src\\jobs\\wingmanScheduler.js"
+        ],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ jobs: wingmanScheduler"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 1,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ jobs: wingmanScheduler"
+    },
+    {
+      "key": "buttonhandler",
+      "name": "Buttonhandler",
+      "files": [
+        "src\\events\\interactionCreate\\buttonHandler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\interactionCreate\\buttonHandler.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "commandhandler",
+      "name": "Commandhandler",
+      "files": [
+        "src\\events\\interactionCreate\\commandHandler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\interactionCreate\\commandHandler.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "modalhandler",
+      "name": "Modalhandler",
+      "files": [
+        "src\\events\\interactionCreate\\modalHandler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\interactionCreate\\modalHandler.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "selectmenuhandler",
+      "name": "Selectmenuhandler",
+      "files": [
+        "src\\events\\interactionCreate\\selectMenuHandler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [
+          "src\\events\\interactionCreate\\selectMenuHandler.js"
+        ],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0.05,
+      "status": "SKIP",
+      "statusReason": "Infrastructure/backend only",
+      "flows": [
+        "→ 1 event(s)"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 1,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "→ 1 event(s)"
+    },
+    {
+      "key": "admincommandtemplates",
+      "name": "Admincommandtemplates",
+      "files": [
+        "src\\config\\adminCommandTemplates.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "constants",
+      "name": "Constants",
+      "files": [
+        "src\\config\\constants.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "environment",
+      "name": "Environment",
+      "files": [
+        "src\\config\\environment.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "factionconfig",
+      "name": "Factionconfig",
+      "files": [
+        "src\\config\\factionConfig.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "secondaryxpsources",
+      "name": "Secondaryxpsources",
+      "files": [
+        "src\\config\\secondaryXPSources.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "settings",
+      "name": "Settings",
+      "files": [
+        "src\\config\\settings.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "wingmanconfig",
+      "name": "Wingmanconfig",
+      "files": [
+        "src\\config\\wingmanConfig.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "postgres",
+      "name": "Postgres",
+      "files": [
+        "src\\database\\postgres.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "runmigrations",
+      "name": "Runmigrations",
+      "files": [
+        "src\\database\\runMigrations.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "inputvalidator",
+      "name": "Inputvalidator",
+      "files": [
+        "src\\middleware\\InputValidator.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "permissionguard",
+      "name": "Permissionguard",
+      "files": [
+        "src\\middleware\\PermissionGuard.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "ratelimiter",
+      "name": "Ratelimiter",
+      "files": [
+        "src\\middleware\\RateLimiter.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "discordattachments",
+      "name": "Discordattachments",
+      "files": [
+        "src\\utils\\discordAttachments.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "errorhandler",
+      "name": "Errorhandler",
+      "files": [
+        "src\\utils\\errorHandler.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "logger",
+      "name": "Logger",
+      "files": [
+        "src\\utils\\logger.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "plaintextreplies",
+      "name": "Plaintextreplies",
+      "files": [
+        "src\\utils\\plainTextReplies.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "social",
+      "name": "Social",
+      "files": [
+        "src\\utils\\social.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "timeutils",
+      "name": "Timeutils",
+      "files": [
+        "src\\utils\\timeUtils.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "validator",
+      "name": "Validator",
+      "files": [
+        "src\\utils\\validator.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "zapier",
+      "name": "Zapier",
+      "files": [
+        "src\\ai\\webhooks\\zapier.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "baserepository",
+      "name": "Baserepository",
+      "files": [
+        "src\\database\\repositories\\BaseRepository.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "statsrepository",
+      "name": "Statsrepository",
+      "files": [
+        "src\\database\\repositories\\StatsRepository.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "tenseyrepository",
+      "name": "Tenseyrepository",
+      "files": [
+        "src\\database\\repositories\\TenseyRepository.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    },
+    {
+      "key": "userrepository",
+      "name": "Userrepository",
+      "files": [
+        "src\\database\\repositories\\UserRepository.js"
+      ],
+      "kinds": [
+        "other"
+      ],
+      "evidence": {
+        "commands": [],
+        "services": [],
+        "jobs": [],
+        "events": [],
+        "tables": [],
+        "env": [],
+        "markers": [],
+        "candidates": []
+      },
+      "confidence": 0,
+      "status": "FAIL",
+      "statusReason": "No components detected",
+      "flows": [
+        "No flow inferred"
+      ],
+      "counts": {
+        "commands": 0,
+        "services": 0,
+        "jobs": 0,
+        "events": 0,
+        "tables": 0,
+        "env": 0,
+        "candidates": 0,
+        "markers": 0
+      },
+      "primaryFlow": "No flow inferred"
+    }
+  ],
+  "discovery": {
+    "srcFiles": [
+      "src\\commands\\commandRegistry.js",
+      "src\\commands\\index.js",
+      "src\\config\\adminCommandTemplates.js",
+      "src\\config\\constants.js",
+      "src\\config\\discord.js",
+      "src\\config\\environment.js",
+      "src\\config\\factionConfig.js",
+      "src\\config\\secondaryXPSources.js",
+      "src\\config\\settings.js",
+      "src\\config\\wingmanConfig.js",
+      "src\\database\\postgres.js",
+      "src\\database\\runMigrations.js",
+      "src\\events\\guildMemberAdd.candidate.js",
+      "src\\events\\guildMemberAdd.js",
+      "src\\events\\index.js",
+      "src\\events\\messageCreate.js",
+      "src\\events\\ready.js",
+      "src\\jobs\\duelsFinalizer.js",
+      "src\\jobs\\wingmanScheduler.js",
+      "src\\middleware\\InputValidator.js",
+      "src\\middleware\\PermissionGuard.js",
+      "src\\middleware\\RateLimiter.js",
+      "src\\services\\index.js",
+      "src\\utils\\discordAttachments.js",
+      "src\\utils\\errorHandler.js",
+      "src\\utils\\logger.js",
+      "src\\utils\\plainTextReplies.js",
+      "src\\utils\\social.js",
+      "src\\utils\\timeUtils.js",
+      "src\\utils\\validator.js",
+      "src\\ai\\webhooks\\zapier.js",
+      "src\\commands\\admin\\adjust-xp.js",
+      "src\\commands\\admin\\admin.js",
+      "src\\commands\\admin\\coaching-dashboard.js",
+      "src\\commands\\admin\\coaching-insights.js",
+      "src\\commands\\admin\\course-admin.js",
+      "src\\commands\\admin\\dynamic-commands.js",
+      "src\\commands\\admin\\index.js",
+      "src\\commands\\admin\\reset-stats.js",
+      "src\\commands\\admin\\security.js",
+      "src\\commands\\admin\\set-double-xp.js",
+      "src\\commands\\admin\\start-raid.js",
+      "src\\commands\\barbie\\barbie.js",
+      "src\\commands\\barbie\\index.js",
+      "src\\commands\\course\\course.js",
+      "src\\commands\\course\\index.js",
+      "src\\commands\\ctj\\breakthroughs.js",
+      "src\\commands\\ctj\\index.js",
+      "src\\commands\\ctj\\journal.js",
+      "src\\commands\\duels\\duel.js",
+      "src\\commands\\duels\\index.js",
+      "src\\commands\\factions\\faction-admin.js",
+      "src\\commands\\factions\\index.js",
+      "src\\commands\\help\\help-commands.js",
+      "src\\commands\\help\\help.js",
+      "src\\commands\\help\\index.js",
+      "src\\commands\\leaderboard\\faction-stats.js",
+      "src\\commands\\leaderboard\\index.js",
+      "src\\commands\\leaderboard\\leaderboard.candidate.js",
+      "src\\commands\\leaderboard\\leaderboard.js",
+      "src\\commands\\ops\\index.js",
+      "src\\commands\\ops\\preflight.js",
+      "src\\commands\\ops\\status.js",
+      "src\\commands\\raids\\index.js",
+      "src\\commands\\raids\\raid-status.js",
+      "src\\commands\\stats\\index.js",
+      "src\\commands\\stats\\scorecard.js",
+      "src\\commands\\stats\\stats-days.js",
+      "src\\commands\\stats\\stats-delete.js",
+      "src\\commands\\stats\\stats-edit.js",
+      "src\\commands\\stats\\submit-past-stats.js",
+      "src\\commands\\stats\\submit-stats.js",
+      "src\\commands\\texting\\index.js",
+      "src\\commands\\texting\\texting-finish.js",
+      "src\\commands\\texting\\texting-practice.js",
+      "src\\commands\\texting\\texting-send.js",
+      "src\\commands\\wingman\\index.js",
+      "src\\commands\\wingman\\wingman-admin.js",
+      "src\\database\\repositories\\BaseRepository.js",
+      "src\\database\\repositories\\index.js",
+      "src\\database\\repositories\\StatsRepository.js",
+      "src\\database\\repositories\\TenseyRepository.js",
+      "src\\database\\repositories\\UserRepository.js",
+      "src\\events\\interactionCreate\\buttonHandler.js",
+      "src\\events\\interactionCreate\\commandHandler.js",
+      "src\\events\\interactionCreate\\index.js",
+      "src\\events\\interactionCreate\\modalHandler.js",
+      "src\\events\\interactionCreate\\selectMenuHandler.js",
+      "src\\services\\ai\\ClaudeAnalyzer.js",
+      "src\\services\\ai\\ElevenLabsVoice.js",
+      "src\\services\\ai\\InstagramAnalyzerStub.js",
+      "src\\services\\ai\\InstagramVisionStub.js",
+      "src\\services\\airtable\\AirtableClient.js",
+      "src\\services\\analytics\\ChartGenerator.js",
+      "src\\services\\analytics\\EngagementTracker.js",
+      "src\\services\\analytics\\InterventionGenerator.js",
+      "src\\services\\analytics\\PatternDetector.js",
+      "src\\services\\analytics\\ProgressTracker.js",
+      "src\\services\\analytics\\RiskScorer.js",
+      "src\\services\\automation\\OnboardingOrchestrator.js",
+      "src\\services\\backup\\BackupManager.js",
+      "src\\services\\barbie\\BarbieListManager.js",
+      "src\\services\\compliance\\GDPRExporter.js",
+      "src\\services\\course\\CourseManager.js",
+      "src\\services\\ctj\\CTJAnalyzer.js",
+      "src\\services\\ctj\\CTJMonitor.js",
+      "src\\services\\ctj\\CTJService.js",
+      "src\\services\\discord\\ChannelService.js",
+      "src\\services\\discord\\index.js",
+      "src\\services\\discord\\MessageService.js",
+      "src\\services\\discord\\RoleService.js",
+      "src\\services\\discord\\RoleSync.js",
+      "src\\services\\duels\\DuelManager.js",
+      "src\\services\\email\\EmailService.js",
+      "src\\services\\engagement\\ChatEngagementMonitor.js",
+      "src\\services\\engagement\\WinsMonitor.js",
+      "src\\services\\events\\DoubleXPManager.js",
+      "src\\services\\factions\\FactionBalancer.js",
+      "src\\services\\factions\\FactionService.js",
+      "src\\services\\leaderboard\\LeaderboardService.js",
+      "src\\services\\monitoring\\AutomationLogger.js",
+      "src\\services\\monitoring\\HealthCheck.js",
+      "src\\services\\notifications\\AnnouncementQueue.js",
+      "src\\services\\notifications\\AutoReminderService.js",
+      "src\\services\\notifications\\index.js",
+      "src\\services\\notifications\\ReminderService.js",
+      "src\\services\\onboarding\\OnboardingChatbot.js",
+      "src\\services\\onboarding\\OnboardingTemplate.js",
+      "src\\services\\ops\\PreflightService.js",
+      "src\\services\\raids\\RaidManager.js",
+      "src\\services\\security\\AuditLogger.js",
+      "src\\services\\security\\ContentModerator.js",
+      "src\\services\\security\\WarningSystem.js",
+      "src\\services\\stats\\StatsEditService.js",
+      "src\\services\\stats\\StatsProcessor.js",
+      "src\\services\\tensey\\index.js",
+      "src\\services\\tensey\\TenseyIntegration.js",
+      "src\\services\\tensey\\TenseyManager.js",
+      "src\\services\\texting\\TextingService.js",
+      "src\\services\\texting\\TextingSimulator.js",
+      "src\\services\\user\\ArchetypeService.js",
+      "src\\services\\user\\index.js",
+      "src\\services\\user\\UserService.js",
+      "src\\services\\wingman\\WingmanMatcher.js",
+      "src\\services\\xp\\index.js",
+      "src\\services\\xp\\LevelCalculator.js",
+      "src\\services\\xp\\MultiplierService.js",
+      "src\\services\\xp\\SecondaryXPProcessor.js",
+      "src\\services\\xp\\XPCalculator.js"
+    ],
+    "commands": [
+      {
+        "file": "src\\commands\\admin\\adjust-xp.js",
+        "name": "adjust-xp",
+        "description": "Adjust user XP (Admin only)",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\admin\\admin.js",
+        "name": "admin",
+        "description": "Admin commands (Admin only)",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\admin\\coaching-dashboard.js",
+        "name": "coaching-dashboard",
+        "description": "View inactive users and engagement metrics (Admin only)",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\admin\\coaching-insights.js",
+        "name": "coaching-insights",
+        "description": "Predictive coaching analytics (Admin only)",
+        "hasOptions": true,
+        "optionCount": 5
+      },
+      {
+        "file": "src\\commands\\admin\\course-admin.js",
+        "name": "course-admin",
+        "description": "Manage course content (Admin only)",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\admin\\reset-stats.js",
+        "name": "reset-stats",
+        "description": "Reset user stats (Admin only)",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\admin\\security.js",
+        "name": "security",
+        "description": "Security and moderation tools (Admin only)",
+        "hasOptions": true,
+        "optionCount": 6
+      },
+      {
+        "file": "src\\commands\\admin\\set-double-xp.js",
+        "name": "set-double-xp",
+        "description": "Schedule a Double XP event (Admin only)",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\admin\\start-raid.js",
+        "name": "start-raid",
+        "description": "Start a Warrior or Mage raid event (Admin only)",
+        "hasOptions": true,
+        "optionCount": 3
+      },
+      {
+        "file": "src\\commands\\barbie\\barbie.js",
+        "name": "barbie",
+        "description": "Manage your contact list",
+        "hasOptions": true,
+        "optionCount": 4
+      },
+      {
+        "file": "src\\commands\\course\\course.js",
+        "name": "course",
+        "description": "Access course modules",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\ctj\\breakthroughs.js",
+        "name": "breakthroughs",
+        "description": "View your breakthrough moments from journal entries",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\ctj\\journal.js",
+        "name": "journal",
+        "description": "Record a Confidence-Tension Journal entry",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\duels\\duel.js",
+        "name": "duel",
+        "description": "Challenge players to XP duels",
+        "hasOptions": true,
+        "optionCount": 6
+      },
+      {
+        "file": "src\\commands\\factions\\faction-admin.js",
+        "name": "faction-admin",
+        "description": "Admin: Manage user factions",
+        "hasOptions": true,
+        "optionCount": 4
+      },
+      {
+        "file": "src\\commands\\help\\help-commands.js",
+        "name": "help-commands",
+        "description": "View all available bot commands",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\help\\help.js",
+        "name": "help",
+        "description": "Get help with the bot",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\leaderboard\\faction-stats.js",
+        "name": "faction-stats",
+        "description": "View the Faction War leaderboard",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\leaderboard\\leaderboard.candidate.js",
+        "name": "leaderboard",
+        "description": "View XP or stat-specific leaderboards",
+        "hasOptions": true,
+        "optionCount": 4
+      },
+      {
+        "file": "src\\commands\\leaderboard\\leaderboard.js",
+        "name": "leaderboard",
+        "description": "View leaderboards by XP or specific stat with time ranges",
+        "hasOptions": true,
+        "optionCount": 4
+      },
+      {
+        "file": "src\\commands\\ops\\preflight.js",
+        "name": "preflight",
+        "description": "Admin: Run health diagnostics",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\ops\\status.js",
+        "name": "status",
+        "description": "Admin: Quick bot health summary",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\raids\\raid-status.js",
+        "name": "raid-status",
+        "description": "Check current raid progress",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\stats\\scorecard.js",
+        "name": "scorecard",
+        "description": "View your complete stats scorecard",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\stats\\stats-days.js",
+        "name": "stats-days",
+        "description": "List recent days with stat submissions",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\stats\\stats-delete.js",
+        "name": "stats-delete",
+        "description": "Delete past stats (within 7 days unless admin)",
+        "hasOptions": true,
+        "optionCount": 2
+      },
+      {
+        "file": "src\\commands\\stats\\stats-edit.js",
+        "name": "stats-edit",
+        "description": "Edit past stats (within 7 days unless admin)",
+        "hasOptions": true,
+        "optionCount": 3
+      },
+      {
+        "file": "src\\commands\\stats\\submit-past-stats.js",
+        "name": "submit-past-stats",
+        "description": "Submit stats for a previous day",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\stats\\submit-stats.js",
+        "name": "submit-stats",
+        "description": "Submit your daily stats",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\texting\\texting-finish.js",
+        "name": "texting-finish",
+        "description": "End your active texting practice session and get your score",
+        "hasOptions": false,
+        "optionCount": 0
+      },
+      {
+        "file": "src\\commands\\texting\\texting-practice.js",
+        "name": "texting-practice",
+        "description": "Start or resume a texting practice scenario",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\texting\\texting-send.js",
+        "name": "texting-send",
+        "description": "Send a message in your active texting practice session",
+        "hasOptions": true,
+        "optionCount": 1
+      },
+      {
+        "file": "src\\commands\\wingman\\wingman-admin.js",
+        "name": "wingman-admin",
+        "description": "Admin: Manage wingman matcher",
+        "hasOptions": true,
+        "optionCount": 2
+      }
+    ],
+    "services": [
+      {
+        "file": "src\\services\\ai\\ClaudeAnalyzer.js",
+        "exports": [
+          "ClaudeAnalyzer"
+        ]
+      },
+      {
+        "file": "src\\services\\ai\\ElevenLabsVoice.js",
+        "exports": [
+          "ElevenLabsVoice"
+        ]
+      },
+      {
+        "file": "src\\services\\ai\\InstagramAnalyzerStub.js",
+        "exports": [
+          "new"
+        ]
+      },
+      {
+        "file": "src\\services\\ai\\InstagramVisionStub.js",
+        "exports": [
+          "new"
+        ]
+      },
+      {
+        "file": "src\\services\\airtable\\AirtableClient.js",
+        "exports": [
+          "AirtableClient"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\ChartGenerator.js",
+        "exports": [
+          "ChartGenerator"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\EngagementTracker.js",
+        "exports": [
+          "EngagementTracker"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\InterventionGenerator.js",
+        "exports": [
+          "InterventionGenerator"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\PatternDetector.js",
+        "exports": [
+          "PatternDetector"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\ProgressTracker.js",
+        "exports": [
+          "ProgressTracker"
+        ]
+      },
+      {
+        "file": "src\\services\\analytics\\RiskScorer.js",
+        "exports": [
+          "RiskScorer"
+        ]
+      },
+      {
+        "file": "src\\services\\automation\\OnboardingOrchestrator.js",
+        "exports": [
+          "OnboardingOrchestrator"
+        ]
+      },
+      {
+        "file": "src\\services\\backup\\BackupManager.js",
+        "exports": [
+          "BackupManager"
+        ]
+      },
+      {
+        "file": "src\\services\\barbie\\BarbieListManager.js",
+        "exports": [
+          "BarbieListManager"
+        ]
+      },
+      {
+        "file": "src\\services\\compliance\\GDPRExporter.js",
+        "exports": [
+          "GDPRExporter"
+        ]
+      },
+      {
+        "file": "src\\services\\course\\CourseManager.js",
+        "exports": [
+          "CourseManager"
+        ]
+      },
+      {
+        "file": "src\\services\\ctj\\CTJAnalyzer.js",
+        "exports": [
+          "CTJAnalyzer"
+        ]
+      },
+      {
+        "file": "src\\services\\ctj\\CTJMonitor.js",
+        "exports": [
+          "CTJMonitor"
+        ]
+      },
+      {
+        "file": "src\\services\\ctj\\CTJService.js",
+        "exports": [
+          "CTJService"
+        ]
+      },
+      {
+        "file": "src\\services\\discord\\ChannelService.js",
+        "exports": [
+          "ChannelService"
+        ]
+      },
+      {
+        "file": "src\\services\\discord\\MessageService.js",
+        "exports": [
+          "MessageService"
+        ]
+      },
+      {
+        "file": "src\\services\\discord\\RoleService.js",
+        "exports": [
+          "RoleService"
+        ]
+      },
+      {
+        "file": "src\\services\\discord\\RoleSync.js",
+        "exports": [
+          "RoleSync"
+        ]
+      },
+      {
+        "file": "src\\services\\duels\\DuelManager.js",
+        "exports": [
+          "DuelManager"
+        ]
+      },
+      {
+        "file": "src\\services\\email\\EmailService.js",
+        "exports": [
+          "EmailService"
+        ]
+      },
+      {
+        "file": "src\\services\\engagement\\ChatEngagementMonitor.js",
+        "exports": [
+          "ChatEngagementMonitor"
+        ]
+      },
+      {
+        "file": "src\\services\\engagement\\WinsMonitor.js",
+        "exports": [
+          "WinsMonitor"
+        ]
+      },
+      {
+        "file": "src\\services\\events\\DoubleXPManager.js",
+        "exports": [
+          "DoubleXPManager"
+        ]
+      },
+      {
+        "file": "src\\services\\factions\\FactionBalancer.js",
+        "exports": [
+          "FactionBalancer"
+        ]
+      },
+      {
+        "file": "src\\services\\factions\\FactionService.js",
+        "exports": [
+          "FactionService"
+        ]
+      },
+      {
+        "file": "src\\services\\leaderboard\\LeaderboardService.js",
+        "exports": [
+          "LeaderboardService"
+        ]
+      },
+      {
+        "file": "src\\services\\monitoring\\AutomationLogger.js",
+        "exports": [
+          "AutomationLogger"
+        ]
+      },
+      {
+        "file": "src\\services\\monitoring\\HealthCheck.js",
+        "exports": [
+          "HealthCheck"
+        ]
+      },
+      {
+        "file": "src\\services\\notifications\\AnnouncementQueue.js",
+        "exports": [
+          "AnnouncementQueue"
+        ]
+      },
+      {
+        "file": "src\\services\\notifications\\AutoReminderService.js",
+        "exports": [
+          "AutoReminderService"
+        ]
+      },
+      {
+        "file": "src\\services\\notifications\\ReminderService.js",
+        "exports": [
+          "ReminderService"
+        ]
+      },
+      {
+        "file": "src\\services\\onboarding\\OnboardingChatbot.js",
+        "exports": [
+          "OnboardingChatbot"
+        ]
+      },
+      {
+        "file": "src\\services\\onboarding\\OnboardingTemplate.js",
+        "exports": [
+          "OnboardingTemplate"
+        ]
+      },
+      {
+        "file": "src\\services\\ops\\PreflightService.js",
+        "exports": [
+          "PreflightService"
+        ]
+      },
+      {
+        "file": "src\\services\\raids\\RaidManager.js",
+        "exports": [
+          "RaidManager"
+        ]
+      },
+      {
+        "file": "src\\services\\security\\AuditLogger.js",
+        "exports": [
+          "AuditLogger"
+        ]
+      },
+      {
+        "file": "src\\services\\security\\ContentModerator.js",
+        "exports": [
+          "ContentModerator"
+        ]
+      },
+      {
+        "file": "src\\services\\security\\WarningSystem.js",
+        "exports": [
+          "WarningSystem"
+        ]
+      },
+      {
+        "file": "src\\services\\stats\\StatsEditService.js",
+        "exports": [
+          "StatsEditService"
+        ]
+      },
+      {
+        "file": "src\\services\\stats\\StatsProcessor.js",
+        "exports": [
+          "StatsProcessor"
+        ]
+      },
+      {
+        "file": "src\\services\\tensey\\TenseyIntegration.js",
+        "exports": [
+          "TenseyIntegration"
+        ]
+      },
+      {
+        "file": "src\\services\\tensey\\TenseyManager.js",
+        "exports": [
+          "TenseyManager"
+        ]
+      },
+      {
+        "file": "src\\services\\texting\\TextingService.js",
+        "exports": [
+          "TextingService"
+        ]
+      },
+      {
+        "file": "src\\services\\texting\\TextingSimulator.js",
+        "exports": [
+          "TextingSimulator"
+        ]
+      },
+      {
+        "file": "src\\services\\user\\ArchetypeService.js",
+        "exports": [
+          "ArchetypeService"
+        ]
+      },
+      {
+        "file": "src\\services\\user\\UserService.js",
+        "exports": [
+          "UserService"
+        ]
+      },
+      {
+        "file": "src\\services\\wingman\\WingmanMatcher.js",
+        "exports": [
+          "WingmanMatcher"
+        ]
+      },
+      {
+        "file": "src\\services\\xp\\LevelCalculator.js",
+        "exports": []
+      },
+      {
+        "file": "src\\services\\xp\\MultiplierService.js",
+        "exports": [
+          "MultiplierService"
+        ]
+      },
+      {
+        "file": "src\\services\\xp\\SecondaryXPProcessor.js",
+        "exports": [
+          "SecondaryXPProcessor"
+        ]
+      },
+      {
+        "file": "src\\services\\xp\\XPCalculator.js",
+        "exports": []
+      }
+    ],
+    "jobs": [
+      {
+        "file": "src\\jobs\\duelsFinalizer.js",
+        "exports": []
+      },
+      {
+        "file": "src\\jobs\\wingmanScheduler.js",
+        "exports": []
+      }
+    ],
+    "events": [
+      {
+        "file": "src\\events\\guildMemberAdd.candidate.js"
+      },
+      {
+        "file": "src\\events\\guildMemberAdd.js"
+      },
+      {
+        "file": "src\\events\\index.js"
+      },
+      {
+        "file": "src\\events\\messageCreate.js"
+      },
+      {
+        "file": "src\\events\\ready.js"
+      },
+      {
+        "file": "src\\events\\interactionCreate\\buttonHandler.js"
+      },
+      {
+        "file": "src\\events\\interactionCreate\\commandHandler.js"
+      },
+      {
+        "file": "src\\events\\interactionCreate\\index.js"
+      },
+      {
+        "file": "src\\events\\interactionCreate\\modalHandler.js"
+      },
+      {
+        "file": "src\\events\\interactionCreate\\selectMenuHandler.js"
+      },
+      {
+        "file": "src\\services\\events\\DoubleXPManager.js"
+      }
+    ],
+    "migrationsData": {
+      "migrations": [
+        {
+          "id": 0,
+          "file": "000_initial_schema.sql",
+          "tables": {
+            "creates": [
+              "user_id",
+              "user_id",
+              "user_id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 1,
+          "file": "001_add_tensey_tables.sql",
+          "tables": {
+            "creates": [
+              "user_id",
+              "id"
+            ],
+            "alters": [
+              "users"
+            ],
+            "drops": []
+          }
+        },
+        {
+          "id": 2,
+          "file": "002_add_raid_system.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 3,
+          "file": "003_add_barbie_list.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 4,
+          "file": "004_add_texting_simulator.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 5,
+          "file": "005_add_secondary_xp_system.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 6,
+          "file": "006_add_dueling_system.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 7,
+          "file": "007_add_double_xp_events.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 8,
+          "file": "008_add_ctj_analysis.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 9,
+          "file": "009_add_course_system.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 10,
+          "file": "010_add_security_audit.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 11,
+          "file": "011_add_coaching_analytics.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 12,
+          "file": "012_analytics_tracking.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id",
+              "id",
+              "id",
+              "id",
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 15,
+          "file": "015_add_automation_logging.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "discord_id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 17,
+          "file": "017_barbie_instagram.sql",
+          "tables": {
+            "creates": [],
+            "alters": [
+              "barbie_list",
+              "barbie_list"
+            ],
+            "drops": []
+          }
+        },
+        {
+          "id": 18,
+          "file": "018_barbie_instagram_media.sql",
+          "tables": {
+            "creates": [
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        },
+        {
+          "id": 19,
+          "file": "019_add_ctj_confidence_tension.sql",
+          "tables": {
+            "creates": [],
+            "alters": [
+              "ctj_entries",
+              "ctj_entries"
+            ],
+            "drops": []
+          }
+        },
+        {
+          "id": 20,
+          "file": "020_wingman.sql",
+          "tables": {
+            "creates": [
+              "id",
+              "id"
+            ],
+            "alters": [],
+            "drops": []
+          }
+        }
+      ],
+      "gaps": [
+        "12 → 15",
+        "15 → 17"
+      ]
+    },
+    "env": {
+      "used": [
+        "DATABASE_SSL",
+        "CA_CERT_PATH",
+        "LUMINARCH_ROLE_ID",
+        "NOCTIVORE_ROLE_ID",
+        "CHANNEL_DUELS_ID",
+        "CHANNEL_GENERAL_ID",
+        "SECOPS_ENABLE_HEALTHCHECKS",
+        "SECOPS_HEALTHCHECK_INTERVAL_MIN",
+        "SECOPS_ENABLE_AUTOBACKUP",
+        "LOG_LEVEL",
+        "ZAPIER_WEBHOOK_KEY",
+        "ANTHROPIC_API_KEY",
+        "ELEVENLABS_API_KEY",
+        "ELEVENLABS_VOICE_ID",
+        "S3_BUCKET",
+        "AIRTABLE_API_KEY",
+        "AIRTABLE_BASE_ID",
+        "TYPEFORM_URL",
+        "JOURNAL_CHANNEL_ID",
+        "SENDGRID_API_KEY",
+        "FROM_EMAIL",
+        "FROM_NAME",
+        "WINS_CHANNEL_ID",
+        "EMERGENCY_CALL_BOOKING_LINK",
+        "SECOPS_ENFORCE_MODERATION",
+        "ADMIN_USER_ID"
+      ],
+      "inTemplate": [
+        "DISCORD_TOKEN",
+        "DISCORD_CLIENT_ID",
+        "DISCORD_GUILD_ID",
+        "DATABASE_URL",
+        "CHANNEL_GENERAL_ID",
+        "ADMIN_USER_ID",
+        "CHANNEL_INPUT_ID",
+        "CHANNEL_LEADERBOARD_ID",
+        "CHANNEL_SCORECARD_ID",
+        "JOURNAL_CHANNEL_ID",
+        "WINS_CHANNEL_ID",
+        "CHANNEL_BARBIE_ID",
+        "CHANNEL_RAIDS_ID",
+        "CHANNEL_COACHING_ID",
+        "CHANNEL_TEXTING_ID",
+        "CHANNEL_DUELS_ID",
+        "TENSEYLIST_CHANNEL_ID",
+        "TENSEY_LEADERBOARD_CHANNEL_ID",
+        "FACTION_CHANNEL_LUMINARCHS",
+        "FACTION_CHANNEL_NOCTIVORES",
+        "FREE_EVENT_ANNOUNCE_CHANNEL_ID",
+        "ROLE_AWKWARD_INITIATE",
+        "ROLE_SOCIAL_SQUIRE",
+        "ROLE_BOLD_EXPLORER",
+        "ROLE_MAGNETIC_CHALLENGER",
+        "ROLE_AUDACIOUS_KNIGHT",
+        "ROLE_CHARISMA_VANGUARD",
+        "ROLE_SEDUCTION_SAGE",
+        "ROLE_EMBODIMENT_WARLORD",
+        "ROLE_FLIRTATION_OVERLORD",
+        "ROLE_REALITY_ARCHITECT",
+        "ROLE_GALACTIC_SEXY_BASTARD",
+        "ROLE_FACTION_LUMINARCHS",
+        "ROLE_FACTION_NOCTIVORES",
+        "LUMINARCH_ROLE_ID",
+        "NOCTIVORE_ROLE_ID",
+        "ROLE_RANK_TOP1_COLOR",
+        "ROLE_RANK_TOP3_COLOR",
+        "ROLE_RANK_TOP10_COLOR",
+        "LOG_LEVEL",
+        "EMERGENCY_CALL_BOOKING_LINK",
+        "FACTION_ANNOUNCEMENTS_ENABLED",
+        "FREE_EVENT_LEVEL",
+        "DATABASE_SSL",
+        "CA_CERT_PATH",
+        "DATABASE_HOST",
+        "DATABASE_PORT",
+        "DATABASE_NAME",
+        "DATABASE_USER",
+        "DATABASE_PASSWORD",
+        "SECOPS_ENABLE_HEALTHCHECKS",
+        "SECOPS_HEALTHCHECK_INTERVAL_MIN",
+        "SECOPS_ENABLE_AUTOBACKUP",
+        "SECOPS_ENFORCE_MODERATION",
+        "ANTHROPIC_API_KEY",
+        "ELEVENLABS_API_KEY",
+        "ELEVENLABS_VOICE_ID",
+        "S3_BUCKET",
+        "AIRTABLE_API_KEY",
+        "AIRTABLE_BASE_ID",
+        "SENDGRID_API_KEY",
+        "FROM_EMAIL",
+        "FROM_NAME",
+        "ZAPIER_WEBHOOK_KEY",
+        "TYPEFORM_URL",
+        "FREE_EVENT_BANNER_URL",
+        "TENSEY_DISCORD_TOKEN",
+        "TENSEY_CLIENT_ID",
+        "TENSEY_GUILD_ID",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_NAME",
+        "DB_USER",
+        "DB_PASSWORD",
+        "TENSEY_ANNOUNCE_ENABLED",
+        "PIN_TENSEY_BUTTON",
+        "PIN_LEADERBOARD_BUTTON",
+        "XP_AWARD_DELAY_SECONDS",
+        "BANNER_URL_OPEN_BUTTON",
+        "BANNER_URL_CHECKLIST",
+        "BANNER_URL_LEADERBOARD",
+        "TENSEY_ANNOUNCE_XP",
+        "TENSEY_ANNOUNCE_THROTTLE_MS",
+        "NODE_ENV",
+        "WINGMAN_MATCHUPS_CHANNEL_ID",
+        "WINGMAN_TZ",
+        "WINGMAN_SCHEDULE_DAY",
+        "WINGMAN_SCHEDULE_TIME",
+        "WINGMAN_LOOKBACK_WEEKS",
+        "WINGMAN_ELIGIBLE_ROLE_ID",
+        "WINGMAN_MIN_LEVEL",
+        "WINGMAN_PAIR_ODD_MODE",
+        "WINGMAN_PREFER_CROSS_FACTION"
+      ],
+      "inEnv": [
+        "DISCORD_TOKEN",
+        "ADMIN_USER_ID",
+        "CHANNEL_GENERAL_ID",
+        "DB_HOST",
+        "DB_PORT",
+        "DB_USER",
+        "DB_PASSWORD",
+        "DB_NAME",
+        "WINGMAN_MATCHUPS_CHANNEL_ID",
+        "WINGMAN_TZ",
+        "WINGMAN_SCHEDULE_DAY",
+        "WINGMAN_SCHEDULE_TIME",
+        "WINGMAN_LOOKBACK_WEEKS",
+        "WINGMAN_ELIGIBLE_ROLE_ID",
+        "WINGMAN_MIN_LEVEL",
+        "WINGMAN_PAIR_ODD_MODE",
+        "WINGMAN_PREFER_CROSS_FACTION",
+        "LUMINARCH_ROLE_ID",
+        "NOCTIVORE_ROLE_ID"
+      ],
+      "missing": []
+    },
+    "markers": [
+      {
+        "file": "src\\utils\\plainTextReplies.js",
+        "line": 43,
+        "text": "return `TODO:${kind}:${idOrPrefix} - This ${kind} handler is not yet implemented.`;",
+        "pattern": "TODO:"
+      },
+      {
+        "file": "src\\services\\analytics\\ProgressTracker.js",
+        "line": 345,
+        "text": "// TODO: Send celebration message",
+        "pattern": "TODO:"
+      },
+      {
+        "file": "src\\services\\ctj\\CTJAnalyzer.js",
+        "line": 32,
+        "text": "// TODO: Implement AI analysis (Phase 11 - AI Client Brain)",
+        "pattern": "TODO:"
+      },
+      {
+        "file": "src\\services\\factions\\FactionService.js",
+        "line": 2,
+        "text": "// TEMP STUB — DO NOT SHIP",
+        "pattern": "TEMP STUB"
+      },
+      {
+        "file": "src\\services\\factions\\FactionService.js",
+        "line": 2,
+        "text": "// TEMP STUB — DO NOT SHIP",
+        "pattern": "DO NOT SHIP"
+      },
+      {
+        "file": "src\\services\\factions\\FactionService.js",
+        "line": 15,
+        "text": "logger.warn('FactionService is a TEMP STUB - no logic implemented');",
+        "pattern": "TEMP STUB"
+      },
+      {
+        "file": "src\\services\\texting\\TextingSimulator.js",
+        "line": 109,
+        "text": "// TODO: Implement AI-powered responses (Phase 11)",
+        "pattern": "TODO:"
+      },
+      {
+        "file": "src\\services\\xp\\MultiplierService.js",
+        "line": 123,
+        "text": "// TODO: Implement mega mode window check",
+        "pattern": "TODO:"
+      },
+      {
+        "file": "src\\services\\xp\\MultiplierService.js",
+        "line": 134,
+        "text": "// TODO: Query global_modifiers table",
+        "pattern": "TODO:"
+      }
+    ]
+  }
+}

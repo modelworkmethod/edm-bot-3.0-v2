@@ -1,0 +1,32 @@
+{
+  "name": "selekta",
+  "version": "3.1.0",
+  "description": "Small Discord bot to handle tiered onboarding ($29 Club, Epic, Legends) using invite detection and role-based unlock buttons, with post-unlock DMs.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "onboarding",
+    "roles",
+    "invites",
+    "discord.js",
+    "buttons",
+    "tiered-access"
+  ],
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.4.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

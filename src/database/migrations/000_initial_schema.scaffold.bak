@@ -1,0 +1,93 @@
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- TEMP SCAFFOLD — DO NOT SHIP
+-- Initial Schema Migration
+-- BLOCKER: User must define core table schemas
+-- ═══════════════════════════════════════════════════════════════════════════════
+--
+-- This migration creates the foundational tables required by the bot.
+-- All other migrations (001-015) assume these tables exist.
+--
+-- REQUIRED TABLES:
+-- 1. users           (core user profiles, XP, factions, archetypes)
+-- 2. users_stats     (individual stat tracking: approaches, dates, gym, etc.)
+-- 3. daily_records   (daily stat submissions for streak tracking)
+--
+-- ═══════════════════════════════════════════════════════════════════════════════
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- TABLE: users
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Purpose: Core user profiles
+-- Required Columns:
+--   - user_id VARCHAR(255) PRIMARY KEY
+--   - xp INTEGER DEFAULT 0
+--   - level INTEGER DEFAULT 1
+--   - faction VARCHAR(50)
+--   - archetype VARCHAR(50)
+--   - created_at TIMESTAMP DEFAULT NOW()
+--   - updated_at TIMESTAMP DEFAULT NOW()
+--
+-- TODO(User): Add CREATE TABLE statement with complete column definitions
+--
+-- CREATE TABLE IF NOT EXISTS users (
+--   user_id VARCHAR(255) PRIMARY KEY,
+--   xp INTEGER DEFAULT 0,
+--   level INTEGER DEFAULT 1,
+--   -- TODO: Add all remaining columns
+-- );
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- TABLE: users_stats
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Purpose: Individual stat tracking (approaches, dates, gym sessions, etc.)
+-- Required Columns:
+--   - user_id VARCHAR(255) REFERENCES users(user_id)
+--   - stat_name VARCHAR(100)
+--   - total_count INTEGER DEFAULT 0
+--   - created_at TIMESTAMP DEFAULT NOW()
+--   - updated_at TIMESTAMP DEFAULT NOW()
+--
+-- TODO(User): Add CREATE TABLE statement with complete column definitions
+--
+-- CREATE TABLE IF NOT EXISTS users_stats (
+--   user_id VARCHAR(255) REFERENCES users(user_id),
+--   stat_name VARCHAR(100),
+--   -- TODO: Add all remaining columns
+--   PRIMARY KEY (user_id, stat_name)
+-- );
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- TABLE: daily_records
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Purpose: Daily stat submissions for streak tracking
+-- Required Columns:
+--   - user_id VARCHAR(255) REFERENCES users(user_id)
+--   - date DATE
+--   - stat_name VARCHAR(100)
+--   - count INTEGER DEFAULT 0
+--   - created_at TIMESTAMP DEFAULT NOW()
+--
+-- TODO(User): Add CREATE TABLE statement with complete column definitions
+--
+-- CREATE TABLE IF NOT EXISTS daily_records (
+--   user_id VARCHAR(255) REFERENCES users(user_id),
+--   date DATE,
+--   stat_name VARCHAR(100),
+--   -- TODO: Add all remaining columns
+--   PRIMARY KEY (user_id, date, stat_name)
+-- );
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- INDICES (Recommended)
+-- ─────────────────────────────────────────────────────────────────────────────
+-- TODO(User): Add index definitions
+-- CREATE INDEX idx_users_xp ON users(xp DESC);
+-- CREATE INDEX idx_users_faction ON users(faction);
+-- CREATE INDEX idx_users_stats_user ON users_stats(user_id);
+-- CREATE INDEX idx_daily_records_user_date ON daily_records(user_id, date DESC);
+
+-- ═══════════════════════════════════════════════════════════════════════════════
+-- END OF SCAFFOLD
+-- User must replace TODO blocks with actual SQL before running migrations
+-- ═══════════════════════════════════════════════════════════════════════════════
+
