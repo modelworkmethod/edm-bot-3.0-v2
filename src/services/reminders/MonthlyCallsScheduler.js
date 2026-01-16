@@ -232,10 +232,12 @@ function startMonthlyCallsScheduler(client, {
   started = true;
   logger.info('Monthly calls scheduler started', { tz: TZ, channelId });
 
-  // ✅ optional: print samples right away
-  setTimeout(() => {
-    sendTestSamples(client, channelId, (off) => buildPayload(off, true)).catch(() => {});
-  }, 2500);
+  // ✅ optional: print samples right away (only if MONTHLYCALLS_TEST_ON_START=true)
+  if (String(process.env.MONTHLYCALLS_TEST_ON_START || '').toLowerCase() === 'true') {
+    setTimeout(() => {
+      sendTestSamples(client, channelId, (off) => buildPayload(off, true)).catch(() => {});
+    }, 2500);
+  }
 }
 
 function stopMonthlyCallsScheduler() {

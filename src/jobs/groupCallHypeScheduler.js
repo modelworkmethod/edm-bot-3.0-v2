@@ -1,8 +1,12 @@
 /**
- * Group Call Hype Scheduler
- * Sends "N days out" hype reminders for weekly calls
- *
- * Uses Luxon (NO moment-timezone dependency)
+ * Group Call Reminder Scheduler
+ * Sends reminders for weekly calls at specific offsets before call time:
+ * - 24hrs before
+ * - 6hrs before
+ * - 3hrs before
+ * - 1hr before
+ * - 15min before
+ * - Call start time
  */
 
 const cron = require('node-cron');
@@ -10,19 +14,25 @@ const { DateTime } = require('luxon');
 const { EmbedBuilder } = require('discord.js');
 const { createLogger } = require('../utils/logger');
 
-const logger = createLogger('GroupCallHypeScheduler');
+const logger = createLogger('GroupCallReminderScheduler');
 
 const TZ = 'America/New_York';
 
-// ✅ Client requested 4 days out
-const HYPE_OFFSET_DAYS = Number(process.env.GROUPCALL_HYPE_DAYS_OUT || 4);
+// Reminder offsets in minutes (negative = before call)
+const REMINDER_OFFSETS = [
+  { key: '24h', mins: -24 * 60, label: '⏰ 24 hours' },
+  { key: '6h',  mins: -6 * 60,  label: '⏰ 6 hours' },
+  { key: '3h',  mins: -3 * 60,  label: '⏰ 3 hours' },
+  { key: '1h',  mins: -60,      label: '⏰ 1 hour' },
+  { key: '15m', mins: -15,      label: '⏱️ 15 minutes' },
+  { key: 'now', mins: 0,        label: '🚀 Starting now' },
+];
 
-// ✅ Prevent duplicates in-memory
+// Prevent duplicates in-memory
 const SENT = new Set();
 
-function makeKey(callKey, occurrenceEt, slotKey) {
-  // slotKey = "09:00" | "15:00" | "20:00" etc. so the same day can send multiple times safely
-  return `${callKey}:${occurrenceEt.toISODate()}:${slotKey}`;
+function makeKey(callKey, occurrenceEt, offsetKey) {
+  return `${callKey}:${occurrenceEt.toISO()}:${offsetKey}`;
 }
 
 /**
@@ -32,27 +42,28 @@ function makeKey(callKey, occurrenceEt, slotKey) {
  */
 function nextOccurrenceWeekly(nowEt, { weekday, hour }) {
   const todayStart = nowEt.startOf('day');
-
-  // candidate in the current week (or today)
   let candidate = todayStart.plus({ days: (weekday - nowEt.weekday + 7) % 7 })
     .set({ hour, minute: 0, second: 0, millisecond: 0 });
-
-  // if candidate already passed, take next week
+  
   if (candidate <= nowEt) {
     candidate = candidate.plus({ days: 7 });
   }
-
+  
   return candidate;
 }
 
-function buildEmbed({ title, whenText, legendsCallSchedChannelId }) {
+function buildEmbed({ title, whenText, offset, legendsCallSchedChannelId }) {
   const scheduleMention = legendsCallSchedChannelId
     ? `<#${legendsCallSchedChannelId}>`
     : 'the call schedule channel';
 
+  const titleText = offset.key === 'now'
+    ? `🚀 **${title} is starting now!**`
+    : `${offset.label} until ${title}!`;
+
   return new EmbedBuilder()
     .setColor(0x5865f2)
-    .setTitle(`⚡ **${HYPE_OFFSET_DAYS} DAYS** until ${title}!`)
+    .setTitle(`⚡ ${titleText}`)
     .setDescription(
       `🕒 **${whenText}**\n\n` +
       `📌 **Check call links in:** ${scheduleMention}\n\n` +
@@ -61,7 +72,7 @@ function buildEmbed({ title, whenText, legendsCallSchedChannelId }) {
     .setTimestamp();
 }
 
-async function sendHype(client, channelId, embed) {
+async function sendReminder(client, channelId, embed) {
   const channel = await client.channels.fetch(channelId).catch(() => null);
   if (!channel || !channel.isTextBased?.()) return;
   await channel.send({ embeds: [embed] }).catch(() => {});
@@ -69,31 +80,15 @@ async function sendHype(client, channelId, embed) {
 
 /**
  * Start scheduler
- * - Runs daily at 9am, 3pm, 8pm ET (client wants daily reminders cadence)
- * - BUT only sends the "days out" hype when "today == (callDate - HYPE_OFFSET_DAYS)"
- *
- * If you want ONLY once per day, set:
- *   GROUPCALL_HYPE_TIMES=12   (or any hour)
- * Default: 9,15,20
+ * Checks every minute for upcoming reminders
  */
 function startGroupCallHypeScheduler(client, {
   channelId,
   legendsCallSchedChannelId = process.env.LEGENDS_CALL_SCHED_CHANNEL_ID || null,
 } = {}) {
   if (!channelId) {
-    logger.warn('GroupCallHypeScheduler NOT started (missing channelId)');
+    logger.warn('GroupCallReminderScheduler NOT started (missing channelId)');
     return;
-  }
-
-  const timesRaw = String(process.env.GROUPCALL_HYPE_TIMES || '9,15,20');
-  const hours = timesRaw
-    .split(',')
-    .map(s => parseInt(s.trim(), 10))
-    .filter(n => Number.isInteger(n) && n >= 0 && n <= 23);
-
-  if (!hours.length) {
-    logger.warn('GroupCallHypeScheduler: no valid hours in GROUPCALL_HYPE_TIMES; using default 9,15,20');
-    hours.push(9, 15, 20);
   }
 
   const calls = [
@@ -120,61 +115,57 @@ function startGroupCallHypeScheduler(client, {
     },
   ];
 
-  // schedule per hour
-  for (const h of hours) {
-    const slotKey = `${String(h).padStart(2, '0')}:00`;
+  // Check every minute for upcoming reminders
+  cron.schedule('* * * * *', async () => {
+    try {
+      const nowEt = DateTime.now().setZone(TZ);
 
-    cron.schedule(
-      `0 ${h} * * *`, // at minute 0 of hour h, daily
-      async () => {
-        try {
-          const nowEt = DateTime.now().setZone(TZ);
+      for (const call of calls) {
+        const nextCallEt = nextOccurrenceWeekly(nowEt, call);
 
-          for (const call of calls) {
-            const nextCallEt = nextOccurrenceWeekly(nowEt, call);
-            const hypeDayEt = nextCallEt.minus({ days: HYPE_OFFSET_DAYS }).startOf('day');
+        for (const offset of REMINDER_OFFSETS) {
+          const reminderTimeEt = nextCallEt.plus({ minutes: offset.mins });
+          
+          // Check if current time matches reminder time (within 1 minute window)
+          const diffMinutes = Math.abs(nowEt.diff(reminderTimeEt, 'minutes').minutes);
+          if (diffMinutes > 1) continue; // Not the right time yet
 
-            // fire if it's hypeDay (same calendar day)
-            if (!nowEt.hasSame(hypeDayEt, 'day')) continue;
+          const key = makeKey(call.key, nextCallEt, offset.key);
+          if (SENT.has(key)) continue; // Already sent
+          SENT.add(key);
 
-            const key = makeKey(call.key, nextCallEt, slotKey);
-            if (SENT.has(key)) continue;
-            SENT.add(key);
+          const embed = buildEmbed({
+            title: call.title,
+            whenText: call.label,
+            offset,
+            legendsCallSchedChannelId,
+          });
 
-            const embed = buildEmbed({
-              title: call.title,
-              whenText: call.label,
-              legendsCallSchedChannelId,
-            });
+          await sendReminder(client, channelId, embed);
 
-            await sendHype(client, channelId, embed);
-
-            logger.info('Sent group call hype reminder', {
-              call: call.key,
-              occurrence: nextCallEt.toISO(),
-              slot: slotKey,
-              daysOut: HYPE_OFFSET_DAYS,
-            });
-          }
-        } catch (err) {
-          logger.error('GroupCallHypeScheduler tick failed', { error: err?.message });
+          logger.info('Sent group call reminder', {
+            call: call.key,
+            occurrence: nextCallEt.toISO(),
+            offset: offset.key,
+            reminderTime: reminderTimeEt.toISO(),
+          });
         }
-      },
-      { timezone: TZ }
-    );
-  }
+      }
+    } catch (err) {
+      logger.error('GroupCallReminderScheduler tick failed', { error: err?.message });
+    }
+  }, { timezone: TZ });
 
-  logger.info('GroupCallHypeScheduler started', {
+  logger.info('GroupCallReminderScheduler started', {
     channelId,
     tz: TZ,
-    daysOut: HYPE_OFFSET_DAYS,
-    hours,
+    reminders: REMINDER_OFFSETS.map(o => o.key),
     legendsCallSchedChannelId: legendsCallSchedChannelId || null,
   });
 }
 
 /**
- * 🧪 PREVIEW — force hype messages (NO scheduling)
+ * 🧪 PREVIEW — force reminder messages (NO scheduling)
  * Safe for client demo
  */
 async function previewGroupCallHype(client, {
@@ -187,15 +178,16 @@ async function previewGroupCallHype(client, {
   if (!channel || !channel.isTextBased?.()) return;
 
   const previews = [
-    { title: 'Sunday Dating Strategy & Model Work Call', whenText: 'Sunday @ 8:00 PM ET' },
-    { title: 'Wednesday Embodiment Call', whenText: 'Wednesday @ 7:00 PM ET' },
-    { title: 'Saturday Social Flow Call', whenText: 'Saturday @ 5:00 PM ET' },
+    { title: 'Sunday Dating Strategy & Model Work Call', whenText: 'Sunday @ 8:00 PM ET', offset: REMINDER_OFFSETS[0] },
+    { title: 'Wednesday Embodiment Call', whenText: 'Wednesday @ 7:00 PM ET', offset: REMINDER_OFFSETS[0] },
+    { title: 'Saturday Social Flow Call', whenText: 'Saturday @ 5:00 PM ET', offset: REMINDER_OFFSETS[0] },
   ];
 
   for (const c of previews) {
     const embed = buildEmbed({
       title: c.title,
       whenText: c.whenText,
+      offset: c.offset,
       legendsCallSchedChannelId,
     });
 

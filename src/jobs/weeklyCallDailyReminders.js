@@ -142,11 +142,9 @@ function startWeeklyCallDailyReminders(client, {
     return;
   }
 
-  // ✅ 3 times per day ET: 09:00, 15:00, 20:00
+  // ✅ Once per day ET: 23:00 (11pm)
   const schedules = [
-    { label: '09:00', expr: '0 9 * * *' },
-    { label: '15:00', expr: '0 15 * * *' },
-    { label: '20:00', expr: '0 20 * * *' },
+    { label: '23:00', expr: '0 23 * * *' },
   ];
 
   for (const s of schedules) {
@@ -174,7 +172,7 @@ function startWeeklyCallDailyReminders(client, {
   logger.info('WeeklyCallDailyReminders started', {
     tz: TZ,
     channelId,
-    times: schedules.map(x => x.label),
+    times: ['23:00'], // Updated to reflect single daily time
     legendsCallSchedChannelId: legendsCallSchedChannelId || null,
   });
 
