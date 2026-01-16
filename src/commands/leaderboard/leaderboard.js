@@ -125,7 +125,7 @@ module.exports = {
       const entries = [];
       for (const entry of shown) {
         const userId = entry.userId || entry.user_id;
-        let displayName = entry.username || 'Unknown User';
+        let displayName = entry.username || null;
 
         if (guild && userId) {
           try {
@@ -135,10 +135,21 @@ module.exports = {
               member?.user?.globalName ||
               member?.user?.username ||
               displayName;
-          } catch {}
+          } catch {
+            // Member fetch failed - use fallback (userId as display name)
+            // This prevents "Unknown User" but still shows the user on leaderboard
+            displayName = displayName || `<@${userId}>`;
+          }
+        } else if (!userId) {
+          // If no userId at all, skip this entry
+          continue;
+        } else {
+          // No guild context - use fallback
+          displayName = displayName || `<@${userId}>`;
         }
 
-        entries.push({ ...entry, userId, displayName });
+        // Add entry with displayName (either from member fetch or fallback)
+        entries.push({ ...entry, userId, displayName: displayName || `<@${userId}>` });
       }
 
       // ✅ If all values are 0 (ghost user after reset), treat as empty

@@ -449,7 +449,10 @@ class DuelManager {
       `SELECT *
        FROM duels
        WHERE (challenger_id = $1 OR opponent_id = $1 OR challenger_id = $2 OR opponent_id = $2)
-         AND status IN ('pending', 'active')
+         AND (
+           (status = 'pending' AND created_at > NOW() - INTERVAL '1 hour')
+           OR (status = 'active' AND end_time > NOW())
+         )
        LIMIT 1`,
       [challengerId, opponentId]
     );
